@@ -15,13 +15,15 @@ export interface DayProps {
   children(props: DayInnerProps): ReactNode;
 }
 
+/**
+ * @internal
+ */
 export const Day: FC<DayProps> = ({ children }) => {
   const { selectedDate, setSelectedDate, temporarySelectedMonth } =
     useDatePickerContext();
   const { date } = useDayContext();
 
   const onClick = useCallback(() => {
-    console.log(`clicked button with date: ${date.toString()}`);
     setSelectedDate(date);
   }, [setSelectedDate, date]);
 

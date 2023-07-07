@@ -15,6 +15,9 @@ export interface CalendarProps {
 
 const MINIMUM_RENDERED_WEEKS = 3;
 
+/**
+ * @internal
+ */
 export const Calendar: FC<CalendarProps> = ({ children }) => {
   const { selectedDate, temporarySelectedMonth, temporarySelectedYear } =
     useDatePickerContext();

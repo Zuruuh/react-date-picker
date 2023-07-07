@@ -1,4 +1,4 @@
-import { useState, type ReactNode, type FC } from 'react';
+import { useState, type ReactNode, type FC, useMemo } from 'react';
 import { DatePickerContext } from './context/DatePickerContext';
 import { Calendar } from './components/Calendar';
 import { Setter } from './types/setter';
@@ -12,8 +12,11 @@ export interface DatePickerProps {
   children: ReactNode;
 }
 
-const DatePicker: FC<DatePickerProps> = ({ children }) => {
-  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
+const DatePicker: FC<DatePickerProps> = ({
+  children,
+  selectedDate,
+  setSelectedDate,
+}) => {
   const [temporarySelectedMonth, setTemporarySelectedMonth] = useState(
     day().month()
   );
@@ -21,20 +24,27 @@ const DatePicker: FC<DatePickerProps> = ({ children }) => {
     day().year()
   );
 
+  const providerProps = useMemo(
+    () => ({
+      selectedDate,
+      setSelectedDate,
+      temporarySelectedMonth,
+      setTemporarySelectedMonth,
+      temporarySelectedYear,
+      setTemporarySelectedYear,
+    }),
+    [
+      selectedDate,
+      setSelectedDate,
+      temporarySelectedMonth,
+      setTemporarySelectedMonth,
+      temporarySelectedYear,
+      setTemporarySelectedYear,
+    ]
+  );
+
   return (
-    <DatePickerContext.Provider
-      value={{
-        selectedDate,
-        setSelectedDate: (...args) => {
-          console.log(`setSelectedDate called with args: ${args[0]}`);
-          return setSelectedDate(...args);
-        },
-        temporarySelectedMonth,
-        setTemporarySelectedMonth,
-        temporarySelectedYear,
-        setTemporarySelectedYear,
-      }}
-    >
+    <DatePickerContext.Provider value={providerProps}>
       {children}
     </DatePickerContext.Provider>
   );
