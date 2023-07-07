@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DatePicker } from './';
 import type { Story } from '@ladle/react';
 import { withStrictMode } from './ladle/decorators/withStrictMode';
@@ -10,17 +10,13 @@ day.extend(week);
 export const HelloWorld: Story = () => {
   const [date, setDate] = useState<Dayjs | null>(null);
 
-  // useEffect(() => {
-  //   console.log(date);
-  // }, [date]);
-  const stringDate = useMemo(
-    () => (date === null ? '' : date.toString()),
-    [date]
-  );
+  useEffect(() => {
+    console.log(date);
+  }, [date]);
 
   return (
     <>
-      <p>The current selected date is: {stringDate}</p>
+      <p>The current selected date is: {date?.toString()}</p>
       <DatePicker.Root setSelectedDate={setDate} selectedDate={date}>
         <DatePicker.Calendar>
           {({ weekNumber }) => (

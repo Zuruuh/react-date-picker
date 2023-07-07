@@ -1,4 +1,4 @@
-import { useState, type ReactNode, type FC, useMemo } from 'react';
+import { useState, type ReactNode, type FC } from 'react';
 import { DatePickerContext } from './context/DatePickerContext';
 import { Calendar } from './components/Calendar';
 import { Setter } from './types/setter';
@@ -24,27 +24,17 @@ const DatePicker: FC<DatePickerProps> = ({
     day().year()
   );
 
-  const providerProps = useMemo(
-    () => ({
-      selectedDate,
-      setSelectedDate,
-      temporarySelectedMonth,
-      setTemporarySelectedMonth,
-      temporarySelectedYear,
-      setTemporarySelectedYear,
-    }),
-    [
-      selectedDate,
-      setSelectedDate,
-      temporarySelectedMonth,
-      setTemporarySelectedMonth,
-      temporarySelectedYear,
-      setTemporarySelectedYear,
-    ]
-  );
-
   return (
-    <DatePickerContext.Provider value={providerProps}>
+    <DatePickerContext.Provider
+      value={{
+        selectedDate,
+        setSelectedDate,
+        temporarySelectedMonth,
+        setTemporarySelectedMonth,
+        temporarySelectedYear,
+        setTemporarySelectedYear,
+      }}
+    >
       {children}
     </DatePickerContext.Provider>
   );
