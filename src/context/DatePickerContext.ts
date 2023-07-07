@@ -18,6 +18,9 @@ export const DatePickerContext = createContext<DatePickerState | undefined>(
   undefined
 );
 
+/**
+ * @internal
+ */
 export function useDatePickerContext(): DatePickerState {
   const state = useContext(DatePickerContext);
   if (state === undefined) {

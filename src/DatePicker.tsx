@@ -25,7 +25,10 @@ const DatePicker: FC<DatePickerProps> = ({ children }) => {
     <DatePickerContext.Provider
       value={{
         selectedDate,
-        setSelectedDate,
+        setSelectedDate: (...args) => {
+          console.log(`setSelectedDate called with args: ${args[0]}`);
+          return setSelectedDate(...args);
+        },
         temporarySelectedMonth,
         setTemporarySelectedMonth,
         temporarySelectedYear,

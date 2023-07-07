@@ -25,8 +25,23 @@ export const HelloWorld: Story = () => {
               <DatePicker.Week>
                 <div style={{ display: 'flex' }}>
                   <DatePicker.Day>
-                    {({ onClick: onDayClick, date: dayDate }) => (
-                      <button onClick={onDayClick}>{dayDate.date()}</button>
+                    {({
+                      onClick: onDayClick,
+                      date: dayDate,
+                      belongsToSelectedMonth,
+                    }) => (
+                      <button
+                        style={{
+                          width: '50px',
+                          height: '50px',
+                          backgroundColor: belongsToSelectedMonth
+                            ? 'darkgray'
+                            : 'gray',
+                        }}
+                        onClick={onDayClick}
+                      >
+                        {dayDate.date()}
+                      </button>
                     )}
                   </DatePicker.Day>
                 </div>

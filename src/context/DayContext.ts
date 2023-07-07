@@ -10,6 +10,9 @@ export interface DayContextState {
  */
 export const DayContext = createContext<DayContextState | undefined>(undefined);
 
+/**
+ * @internal
+ */
 export function useDayContext(): DayContextState {
   const state = useContext(DayContext);
   if (state === undefined) {
