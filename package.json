@@ -1,0 +1,65 @@
+{
+  "name": "@zuruuh/react-date-picker",
+  "private": false,
+  "version": "0.0.1",
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "package.json",
+    "README.md",
+    "LICENSE.txt"
+  ],
+  "main": "dist/@zuruuh/react-date-picker.umd.cjs",
+  "module": "dist/@zuruuh/react-date-picker.js",
+  "exports": {
+    ".": {
+      "import": "./dist/@zuruuh/react-date-picker.js",
+      "require": "./dist/@zuruuh/react-date-picker.umd.cjs"
+    }
+  },
+  "scripts": {
+    "build": "vite build",
+    "test": "vitest run",
+    "test:interactive": "vitest",
+    "test:coverage": "vitest --coverage",
+    "lint": "run-s lint:eslint lint:typescript",
+    "lint:eslint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:typescript": "tsc --noEmit true --emitDeclarationOnly false",
+    "preview": "ladle dev"
+  },
+  "peerDependencies": {
+    "dayjs": "^1.11.7",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@ladle/react": "^2.15.0",
+    "@testing-library/dom": "^9.3.1",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/node": "^18.16.19",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "@typescript-eslint/eslint-plugin": "^5.61.0",
+    "@typescript-eslint/parser": "^5.61.0",
+    "@vitejs/plugin-react": "^4.0.2",
+    "dayjs": "^1.11.9",
+    "eslint": "^8.44.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "jsdom": "^22.1.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.8.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.2",
+    "vite-plugin-dts": "^2.3.0",
+    "vite-tsconfig-paths": "^4.2.0",
+    "vitest": "^0.31.4"
+  }
+}
