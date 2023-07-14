@@ -1,6 +1,4 @@
 import { type ReactNode, type FC, useMemo, useCallback } from 'react';
-import day from 'dayjs';
-// import { WeekContext } from '../context/WeekContext';
 import { useDatePickerContext } from '../context/DatePickerContext';
 import { DAYJS_MONDAY, DAYJS_SUNDAY } from '../consts/date';
 import { WeekContext } from '../context/WeekContext';
@@ -19,15 +17,15 @@ const MINIMUM_RENDERED_WEEKS = 3;
  * @internal
  */
 export const Calendar: FC<CalendarProps> = ({ children }) => {
-  const { selectedDate, temporarySelectedMonth, temporarySelectedYear } =
+  const { selectedDate, temporarySelectedMonth, temporarySelectedYear, dayjs } =
     useDatePickerContext();
   const startOfMonth = useMemo(
     () =>
       (
         selectedDate ??
-        day().month(temporarySelectedMonth).year(temporarySelectedYear)
+        dayjs().month(temporarySelectedMonth).year(temporarySelectedYear)
       ).date(1),
-    [selectedDate, temporarySelectedMonth, temporarySelectedYear]
+    [selectedDate, temporarySelectedMonth, temporarySelectedYear, dayjs]
   );
 
   const createChildren = useCallback(
@@ -59,44 +57,3 @@ export const Calendar: FC<CalendarProps> = ({ children }) => {
 
   return <>{weeks}</>;
 };
-/**
-  const month = useMemo(
-    () =>
-      day()
-        .set('date', 1)
-        .set('month', temporarySelectedMonth)
-        .set('year', temporarySelectedYear),
-    [temporarySelectedYear, temporarySelectedMonth]
-  );
-
-  const elements: ReactNode[] = [];
-  const monthBefore = month.subtract(1, 'month').endOf('month');
-
-  elements.unshift(
-    <WeekContext.Provider value={{ weekNumber: monthBefore.week() }}>
-      {createChildren({ weekNumber: monthBefore.week() })}
-    </WeekContext.Provider>
-  );
-  console.log(date.startOf('week').toString());
-  for (let i = 0; i < MAX_RENDERED_WEEKS; i++) {
-    const weekDate = date.add(i, 'week');
-    if (
-      weekDate.startOf('week').month() !== date.startOf('week').month() &&
-      i > 0
-    ) {
-      console.log(
-        weekDate.startOf('week').toString(),
-        date.startOf('week').toString()
-      );
-      break;
-    }
-    const weekNumber = weekDate.week();
-
-    elements.push(
-      <WeekContext.Provider value={{ weekNumber }} key={weekNumber}>
-        {typeof children === 'function' ? children({ weekNumber }) : children}
-      </WeekContext.Provider>
-    );
-  }
-
-**/

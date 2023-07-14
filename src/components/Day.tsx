@@ -1,5 +1,5 @@
 import { useMemo, type FC, type ReactNode, useCallback } from 'react';
-import day, { type Dayjs } from 'dayjs';
+import { type Dayjs } from 'dayjs';
 import { useDayContext } from '../context/DayContext';
 import { useDatePickerContext } from '../context/DatePickerContext';
 
@@ -19,7 +19,7 @@ export interface DayProps {
  * @internal
  */
 export const Day: FC<DayProps> = ({ children }) => {
-  const { selectedDate, setSelectedDate, temporarySelectedMonth } =
+  const { selectedDate, setSelectedDate, temporarySelectedMonth, dayjs } =
     useDatePickerContext();
   const { date } = useDayContext();
 
@@ -28,8 +28,8 @@ export const Day: FC<DayProps> = ({ children }) => {
   }, [setSelectedDate, date]);
 
   const isCurrentDate = useMemo(
-    () => date.toString() === day().startOf('day').toString(),
-    [date]
+    () => date.toString() === dayjs().startOf('day').toString(),
+    [date, dayjs]
   );
 
   const isSelectionnedDate = useMemo(

@@ -1,7 +1,6 @@
 import { useMemo, type FC, type ReactNode } from 'react';
 import { useWeekContext } from '../context/WeekContext';
 import { useDatePickerContext } from '../context/DatePickerContext';
-import day from 'dayjs';
 import { DayContext } from '../context/DayContext';
 import { DAYJS_DAY_COUNT_IN_A_WEEK } from '../consts/date';
 
@@ -14,10 +13,10 @@ export interface WeekProps {
  */
 export const Week: FC<WeekProps> = ({ children }) => {
   const { weekNumber } = useWeekContext();
-  const { temporarySelectedYear } = useDatePickerContext();
+  const { temporarySelectedYear, dayjs } = useDatePickerContext();
   const date = useMemo(
-    () => day().set('year', temporarySelectedYear).week(weekNumber),
-    [temporarySelectedYear, weekNumber]
+    () => dayjs().set('year', temporarySelectedYear).week(weekNumber),
+    [temporarySelectedYear, weekNumber, dayjs]
   );
 
   return (

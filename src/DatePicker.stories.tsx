@@ -29,12 +29,18 @@ export const HelloWorld: Story = () => {
                       onClick: onDayClick,
                       date: dayDate,
                       belongsToSelectedMonth,
+                      isSelectionnedDate,
+                      isCurrentDate,
                     }) => (
                       <button
                         style={{
                           width: '50px',
                           height: '50px',
-                          backgroundColor: belongsToSelectedMonth
+                          backgroundColor: isSelectionnedDate
+                            ? 'blue'
+                            : isCurrentDate
+                            ? 'green'
+                            : belongsToSelectedMonth
                             ? 'darkgray'
                             : 'gray',
                         }}

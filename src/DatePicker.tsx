@@ -9,6 +9,7 @@ import day, { type Dayjs } from 'dayjs';
 export interface DatePickerProps {
   selectedDate: Dayjs | null;
   setSelectedDate: Setter<Dayjs | null>;
+  dayjs?(): Dayjs;
   children: ReactNode;
 }
 
@@ -16,12 +17,13 @@ const DatePicker: FC<DatePickerProps> = ({
   children,
   selectedDate,
   setSelectedDate,
+  dayjs = () => day().startOf('day'),
 }) => {
   const [temporarySelectedMonth, setTemporarySelectedMonth] = useState(
-    day().month()
+    dayjs().month()
   );
   const [temporarySelectedYear, setTemporarySelectedYear] = useState(
-    day().year()
+    dayjs().year()
   );
 
   return (
@@ -33,6 +35,7 @@ const DatePicker: FC<DatePickerProps> = ({
         setTemporarySelectedMonth,
         temporarySelectedYear,
         setTemporarySelectedYear,
+        dayjs,
       }}
     >
       {children}

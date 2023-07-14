@@ -9,6 +9,7 @@ export interface DatePickerState {
   setTemporarySelectedMonth: Setter<number>;
   temporarySelectedYear: number;
   setTemporarySelectedYear: Setter<number>;
+  dayjs(): Dayjs;
 }
 
 /**
