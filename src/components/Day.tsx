@@ -19,13 +19,26 @@ export interface DayProps {
  * @internal
  */
 export const Day: FC<DayProps> = ({ children }) => {
-  const { selectedDate, setSelectedDate, temporarySelectedMonth, dayjs } =
-    useDatePickerContext();
+  const {
+    selectedDate,
+    setSelectedDate,
+    temporarySelectedMonth,
+    setTemporarySelectedMonth,
+    setTemporarySelectedYear,
+    dayjs,
+  } = useDatePickerContext();
   const { date } = useDayContext();
 
   const onClick = useCallback(() => {
     setSelectedDate(date);
-  }, [setSelectedDate, date]);
+    setTemporarySelectedMonth(date.month());
+    setTemporarySelectedYear(date.year());
+  }, [
+    setSelectedDate,
+    date,
+    setTemporarySelectedMonth,
+    setTemporarySelectedYear,
+  ]);
 
   const isCurrentDate = useMemo(
     () => date.toString() === dayjs().startOf('day').toString(),

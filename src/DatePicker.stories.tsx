@@ -1,18 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { DatePicker } from './';
 import type { Story } from '@ladle/react';
 import { withStrictMode } from './ladle/decorators/withStrictMode';
 import day, { type Dayjs } from 'dayjs';
 import week from 'dayjs/plugin/weekOfYear';
+import utc from 'dayjs/plugin/utc';
+import 'dayjs/locale/fr';
 
 day.extend(week);
+day.extend(utc);
 
 export const HelloWorld: Story = () => {
   const [date, setDate] = useState<Dayjs | null>(null);
-
-  useEffect(() => {
-    console.log(date);
-  }, [date]);
 
   return (
     <>

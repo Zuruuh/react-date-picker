@@ -17,7 +17,7 @@ const DatePicker: FC<DatePickerProps> = ({
   children,
   selectedDate,
   setSelectedDate,
-  dayjs = () => day().startOf('day'),
+  dayjs = () => day().utc(true).startOf('day'),
 }) => {
   const [temporarySelectedMonth, setTemporarySelectedMonth] = useState(
     dayjs().month()
