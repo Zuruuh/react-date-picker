@@ -24,8 +24,7 @@ export const Calendar: FC<CalendarProps> = ({ children }) => {
     [children]
   );
 
-  const weeks: CalendarInnerProps[] = [];
-  weeks.push({ weekNumber: startOfMonth.week() });
+  const weeks: CalendarInnerProps[] = [{ weekNumber: startOfMonth.week() }];
 
   for (
     let i = 0;
