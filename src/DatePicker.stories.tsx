@@ -9,6 +9,7 @@ import 'dayjs/locale/fr';
 
 day.extend(week);
 day.extend(utc);
+day.locale('fr');
 
 export const HelloWorld: Story = () => {
   const [date, setDate] = useState<Dayjs | null>(null);
