@@ -16,16 +16,10 @@ export interface CalendarProps {
 export const Calendar: FC<CalendarProps> = ({ children }) => {
   const { selectedDate, temporarySelectedMonth, temporarySelectedYear, dayjs } =
     useDatePickerContext();
-  const startOfMonth = useMemo(
-    () =>
-      (
-        selectedDate ??
-        dayjs().month(temporarySelectedMonth).year(temporarySelectedYear)
-      )
-        .date(1)
-        .endOf('week'),
-    [selectedDate, temporarySelectedMonth, temporarySelectedYear, dayjs]
-  );
+  const referenceDate =
+    selectedDate ??
+    dayjs().month(temporarySelectedMonth).year(temporarySelectedYear);
+  const startOfMonth = referenceDate.date(1).endOf('week');
 
   const createChildren = useCallback(
     (props: CalendarInnerProps) =>
@@ -36,14 +30,17 @@ export const Calendar: FC<CalendarProps> = ({ children }) => {
   const weeks: CalendarInnerProps[] = [];
   weeks.push({ weekNumber: startOfMonth.week() });
 
-  for (let i = 1; i < 5; i++) {
-    const weekDate = startOfMonth.add(i, 'week').startOf('week');
+  for (
+    let i = 0;
+    startOfMonth.add(i, 'week').month() === referenceDate.month();
+    i++
+  ) {
+    const weekDate = startOfMonth.add(i + 1, 'week').startOf('week');
     const weekNumber = weekDate.week();
 
-    if (weekDate.month() !== startOfMonth.month()) {
-      break;
+    if (weekDate.month() === referenceDate.month()) {
+      weeks.push({ weekNumber });
     }
-    weeks.push({ weekNumber });
   }
 
   return (
