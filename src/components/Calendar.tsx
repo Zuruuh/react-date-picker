@@ -1,4 +1,4 @@
-import { type ReactNode, type FC, useMemo, useCallback } from 'react';
+import { type ReactNode, type FC, useCallback } from 'react';
 import { useDatePickerContext } from '../context/DatePickerContext';
 import { WeekContext } from '../context/WeekContext';
 
@@ -10,9 +10,6 @@ export interface CalendarProps {
   children: ReactNode | ((props: CalendarInnerProps) => ReactNode);
 }
 
-/**
- * @internal
- */
 export const Calendar: FC<CalendarProps> = ({ children }) => {
   const { selectedDate, temporarySelectedMonth, temporarySelectedYear, dayjs } =
     useDatePickerContext();

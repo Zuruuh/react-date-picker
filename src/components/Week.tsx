@@ -7,9 +7,6 @@ export interface WeekProps {
   children: ReactNode;
 }
 
-/**
- * @internal
- */
 export const Week: FC<WeekProps> = ({ children }) => {
   const { weekNumber } = useWeekContext();
   const { temporarySelectedYear, dayjs } = useDatePickerContext();
@@ -26,7 +23,7 @@ export const Week: FC<WeekProps> = ({ children }) => {
     <>
       {Array.from({ length: 7 }).map((_, i) => (
         <DayContext.Provider
-          value={{ date: date.hour(12).add(i, 'day') }}
+          value={{ date: date.add(i, 'day').startOf('day') }}
           key={date.set('day', i).toString()}
         >
           {children}

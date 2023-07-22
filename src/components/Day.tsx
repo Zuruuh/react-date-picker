@@ -15,9 +15,6 @@ export interface DayProps {
   children(props: DayInnerProps): ReactNode;
 }
 
-/**
- * @internal
- */
 export const Day: FC<DayProps> = ({ children }) => {
   const {
     selectedDate,
@@ -40,20 +37,9 @@ export const Day: FC<DayProps> = ({ children }) => {
     setTemporarySelectedYear,
   ]);
 
-  const isCurrentDate = useMemo(
-    () => date.toString() === dayjs().startOf('day').toString(),
-    [date, dayjs]
-  );
-
-  const isSelectionnedDate = useMemo(
-    () => date.toString() === selectedDate?.toString(),
-    [date, selectedDate]
-  );
-
-  const belongsToSelectedMonth = useMemo(
-    () => date.get('month') === temporarySelectedMonth,
-    [date, temporarySelectedMonth]
-  );
+  const isCurrentDate = date.toString() === dayjs().startOf('day').toString();
+  const isSelectionnedDate = date.toString() === selectedDate?.toString();
+  const belongsToSelectedMonth = date.get('month') === temporarySelectedMonth;
 
   return (
     <>
