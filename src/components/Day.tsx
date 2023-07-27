@@ -1,5 +1,6 @@
-import { useMemo, type FC, type ReactNode, useCallback } from 'react';
-import { type Dayjs } from 'dayjs';
+import { useCallback } from 'react';
+import type { FC, ReactNode } from 'react';
+import type { Dayjs } from 'dayjs';
 import { useDayContext } from '../context/DayContext';
 import { useDatePickerContext } from '../context/DatePickerContext';
 
@@ -19,27 +20,21 @@ export const Day: FC<DayProps> = ({ children }) => {
   const {
     selectedDate,
     setSelectedDate,
-    temporarySelectedMonth,
-    setTemporarySelectedMonth,
-    setTemporarySelectedYear,
+    temporarySelectedDate,
+    setTemporarySelectedDate,
     dayjs,
   } = useDatePickerContext();
   const { date } = useDayContext();
 
   const onClick = useCallback(() => {
     setSelectedDate(date);
-    setTemporarySelectedMonth(date.month());
-    setTemporarySelectedYear(date.year());
-  }, [
-    setSelectedDate,
-    date,
-    setTemporarySelectedMonth,
-    setTemporarySelectedYear,
-  ]);
+    setTemporarySelectedDate(date);
+  }, [setSelectedDate, date, setTemporarySelectedDate]);
 
   const isCurrentDate = date.toString() === dayjs().startOf('day').toString();
   const isSelectionnedDate = date.toString() === selectedDate?.toString();
-  const belongsToSelectedMonth = date.get('month') === temporarySelectedMonth;
+  const belongsToSelectedMonth =
+    date.get('month') === temporarySelectedDate.month();
 
   return (
     <>

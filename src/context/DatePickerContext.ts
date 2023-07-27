@@ -5,10 +5,8 @@ import type { Dayjs } from 'dayjs';
 export interface DatePickerState {
   selectedDate: Dayjs | null;
   setSelectedDate: Setter<Dayjs | null>;
-  temporarySelectedMonth: number;
-  setTemporarySelectedMonth: Setter<number>;
-  temporarySelectedYear: number;
-  setTemporarySelectedYear: Setter<number>;
+  temporarySelectedDate: Dayjs;
+  setTemporarySelectedDate: Setter<Dayjs>;
   dayjs(): Dayjs;
 }
 

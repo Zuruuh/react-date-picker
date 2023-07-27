@@ -1,4 +1,5 @@
-import { type ReactNode, type FC, useCallback } from 'react';
+import { useCallback } from 'react';
+import type { ReactNode, FC } from 'react';
 import { useDatePickerContext } from '../context/DatePickerContext';
 import { WeekContext } from '../context/WeekContext';
 
@@ -11,11 +12,8 @@ export interface CalendarProps {
 }
 
 export const Calendar: FC<CalendarProps> = ({ children }) => {
-  const { selectedDate, temporarySelectedMonth, temporarySelectedYear, dayjs } =
-    useDatePickerContext();
-  const referenceDate =
-    selectedDate ??
-    dayjs().month(temporarySelectedMonth).year(temporarySelectedYear);
+  const { selectedDate, temporarySelectedDate } = useDatePickerContext();
+  const referenceDate = selectedDate ?? temporarySelectedDate;
   const startOfMonth = referenceDate.date(1).endOf('week');
 
   const createChildren = useCallback(

@@ -1,4 +1,5 @@
-import { useState, type ReactNode, type FC } from 'react';
+import { useState } from 'react';
+import type { ReactNode, FC } from 'react';
 import {
   DatePickerContext,
   DatePickerState,
@@ -7,7 +8,8 @@ import { Calendar } from './components/Calendar';
 import { Setter } from './types/setter';
 import { Week } from './components/Week';
 import { Day } from './components/Day';
-import day, { type Dayjs } from 'dayjs';
+import day from 'dayjs';
+import type { Dayjs } from 'dayjs';
 
 export interface DatePickerProps {
   selectedDate: Dayjs | null;
@@ -22,20 +24,13 @@ const DatePicker: FC<DatePickerProps> = ({
   setSelectedDate,
   dayjs = () => day().utc(true).startOf('day'),
 }) => {
-  const [temporarySelectedMonth, setTemporarySelectedMonth] = useState(
-    dayjs().month()
-  );
-  const [temporarySelectedYear, setTemporarySelectedYear] = useState(
-    dayjs().year()
-  );
+  const [temporarySelectedDate, setTemporarySelectedDate] = useState(dayjs());
 
   const props: DatePickerState = {
     selectedDate,
     setSelectedDate,
-    temporarySelectedMonth,
-    setTemporarySelectedMonth,
-    temporarySelectedYear,
-    setTemporarySelectedYear,
+    temporarySelectedDate,
+    setTemporarySelectedDate,
     dayjs,
   };
 
