@@ -1,7 +1,26 @@
+* {
+  font-family: 'Poppins';
+}
+
+.calendar {
+  border-radius: 5px;
+  border: solid black 1px;
+  position: absolute;
+  padding: 5px;
+}
+
 .week {
   display: flex;
   flex-direction: row;
   gap: 5px;
+}
+
+.week-number {
+  width: 20px;
+  font-size: 12px;
+  color: red;
+  text-align: center;
+  margin: auto;
 }
 
 .day {
@@ -9,20 +28,31 @@
 }
 
 .day button {
-  --color: darkgray;
-  width: 50px;
-  height: 50px;
-  background-color: var(--color);
+  width: 30px;
+  height: 30px;
+  color: #c5c5c5;
+  border: 0;
+  background: transparent;
+  border-radius: 5px;
+}
+
+.day button:hover {
+  background-color: #eee;
 }
 
 .day button.month {
-  --color: gray;
+  color: black;
 }
 
 .day button.today {
-  --color: green;
+  font-weight: bold;
 }
 
 .day button.selectionned { 
-  --color: blue;
+  color: white;
+  background-color: #0f6fde;
+}
+
+.day button.selectionned:hover {
+  background-color: #1d5d90;
 }
