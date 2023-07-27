@@ -1,8 +1,12 @@
+import './DatePicker.stories.css';
 import { useState } from 'react';
 import { DatePicker } from './';
 import type { Story } from '@ladle/react';
 import { withStrictMode } from './ladle/decorators/withStrictMode';
-import day, { type Dayjs } from 'dayjs';
+import clsx from 'clsx';
+
+import day from 'dayjs';
+import type { Dayjs } from 'dayjs';
 import week from 'dayjs/plugin/weekOfYear';
 import utc from 'dayjs/plugin/utc';
 import 'dayjs/locale/fr';
@@ -20,10 +24,10 @@ export const HelloWorld: Story = () => {
       <DatePicker.Root setSelectedDate={setDate} selectedDate={date}>
         <DatePicker.Calendar>
           {({ weekNumber }) => (
-            <div style={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
+            <div className="week">
               <p>{weekNumber}</p>
               <DatePicker.Week>
-                <div style={{ display: 'flex' }}>
+                <div className="day">
                   <DatePicker.Day>
                     {({
                       onClick: onDayClick,
@@ -33,17 +37,11 @@ export const HelloWorld: Story = () => {
                       isCurrentDate,
                     }) => (
                       <button
-                        style={{
-                          width: '50px',
-                          height: '50px',
-                          backgroundColor: isSelectionnedDate
-                            ? 'blue'
-                            : isCurrentDate
-                            ? 'green'
-                            : belongsToSelectedMonth
-                            ? 'darkgray'
-                            : 'gray',
-                        }}
+                        className={clsx({
+                          selectionned: isSelectionnedDate,
+                          today: isCurrentDate,
+                          month: belongsToSelectedMonth,
+                        })}
                         onClick={onDayClick}
                       >
                         {dayDate.date()}

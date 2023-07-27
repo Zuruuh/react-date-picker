@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 devDependencies:
+  '@fontsource/poppins':
+    specifier: ^5.0.5
+    version: 5.0.5
   '@ladle/react':
     specifier: ^2.16.1
     version: 2.16.1(@types/node@18.17.0)(react-dom@18.2.0)(react@18.2.0)
@@ -32,6 +35,9 @@ devDependencies:
   '@vitejs/plugin-react':
     specifier: ^4.0.3
     version: 4.0.3(vite@4.4.6)
+  clsx:
+    specifier: ^2.0.0
+    version: 2.0.0
   dayjs:
     specifier: ^1.11.9
     version: 1.11.9
@@ -555,6 +561,10 @@ packages:
   /@eslint/js@8.44.0:
     resolution: {integrity: sha512-Ag+9YM4ocKQx9AarydN0KY2j0ErMHNIocPDrVo8zAE44xLTjEtz81OdR68/cydGtk6m6jDb5Za3r2useMzYmSw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    dev: true
+
+  /@fontsource/poppins@5.0.5:
+    resolution: {integrity: sha512-Y/AGmD6iavfobRb7f2l49q0dQSyisvRrUfJ7F0AWOlTNFty8bbnPBbg+5Qsq5EN6xWaIAn++50aLfOCEe7zu3w==}
     dev: true
 
   /@humanwhocodes/config-array@0.11.10:
@@ -1715,6 +1725,11 @@ packages:
 
   /clsx@1.2.1:
     resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
+    engines: {node: '>=6'}
+    dev: true
+
+  /clsx@2.0.0:
+    resolution: {integrity: sha512-rQ1+kcj+ttHG0MKVGBUXwayCCF1oh39BF5COIpRzuCEv8Mwjv0XucrI2ExNTOn9IlLifGClWQcU9BrZORvtw6Q==}
     engines: {node: '>=6'}
     dev: true
 

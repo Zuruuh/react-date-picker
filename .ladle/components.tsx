@@ -1,3 +1,4 @@
+import '@fontsource/poppins';
 import type { GlobalProvider } from '@ladle/react';
 import React, { StrictMode } from 'react';
 

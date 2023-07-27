@@ -1,0 +1,28 @@
+.week {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.day {
+  display: flex;
+}
+
+.day button {
+  --color: darkgray;
+  width: 50px;
+  height: 50px;
+  background-color: var(--color);
+}
+
+.day button.month {
+  --color: gray;
+}
+
+.day button.today {
+  --color: green;
+}
+
+.day button.selectionned { 
+  --color: blue;
+}
