@@ -25,7 +25,7 @@
     "test:interactive": "vitest",
     "test:coverage": "vitest --coverage",
     "lint": "run-s lint:eslint lint:typescript",
-    "lint:eslint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:eslint": "eslint . --ext ts,tsxc,cjs,mjs --report-unused-disable-directives --max-warnings 0",
     "lint:typescript": "tsc --noEmit true --emitDeclarationOnly false",
     "preview": "ladle dev",
     "preview:build": "ladle build"
