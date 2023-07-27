@@ -1,5 +1,8 @@
 import { useState, type ReactNode, type FC } from 'react';
-import { DatePickerContext } from './context/DatePickerContext';
+import {
+  DatePickerContext,
+  DatePickerState,
+} from './context/DatePickerContext';
 import { Calendar } from './components/Calendar';
 import { Setter } from './types/setter';
 import { Week } from './components/Week';
@@ -10,7 +13,7 @@ export interface DatePickerProps {
   selectedDate: Dayjs | null;
   setSelectedDate: Setter<Dayjs | null>;
   dayjs?(): Dayjs;
-  children: ReactNode;
+  children: ReactNode | ((props: DatePickerState) => ReactNode);
 }
 
 const DatePicker: FC<DatePickerProps> = ({
@@ -26,19 +29,19 @@ const DatePicker: FC<DatePickerProps> = ({
     dayjs().year()
   );
 
+  const props: DatePickerState = {
+    selectedDate,
+    setSelectedDate,
+    temporarySelectedMonth,
+    setTemporarySelectedMonth,
+    temporarySelectedYear,
+    setTemporarySelectedYear,
+    dayjs,
+  };
+
   return (
-    <DatePickerContext.Provider
-      value={{
-        selectedDate,
-        setSelectedDate,
-        temporarySelectedMonth,
-        setTemporarySelectedMonth,
-        temporarySelectedYear,
-        setTemporarySelectedYear,
-        dayjs,
-      }}
-    >
-      {children}
+    <DatePickerContext.Provider value={props}>
+      {typeof children === 'function' ? children(props) : children}
     </DatePickerContext.Provider>
   );
 };

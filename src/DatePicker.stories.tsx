@@ -1,5 +1,5 @@
 import './DatePicker.stories.css';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { DatePicker } from './';
 import type { Story } from '@ladle/react';
 import { withStrictMode } from './ladle/decorators/withStrictMode';
@@ -15,6 +15,42 @@ day.extend(week);
 day.extend(utc);
 day.locale('fr');
 
+const MyCalendar: FC = () => {
+  return (
+    <DatePicker.Calendar>
+      {({ weekNumber }) => (
+        <div className="week">
+          <p className="week-number">{weekNumber}</p>
+          <DatePicker.Week>
+            <div className="day">
+              <DatePicker.Day>
+                {({
+                  onClick: onDayClick,
+                  date: dayDate,
+                  belongsToSelectedMonth,
+                  isSelectionnedDate,
+                  isCurrentDate,
+                }) => (
+                  <button
+                    className={clsx({
+                      selectionned: isSelectionnedDate,
+                      today: isCurrentDate,
+                      month: belongsToSelectedMonth,
+                    })}
+                    onClick={onDayClick}
+                  >
+                    {dayDate.date()}
+                  </button>
+                )}
+              </DatePicker.Day>
+            </div>
+          </DatePicker.Week>
+        </div>
+      )}
+    </DatePicker.Calendar>
+  );
+};
+
 export const HelloWorld: Story = () => {
   const [date, setDate] = useState<Dayjs | null>(null);
 
@@ -23,37 +59,7 @@ export const HelloWorld: Story = () => {
       <p>The current selected date is: {date?.toString()}</p>
       <DatePicker.Root setSelectedDate={setDate} selectedDate={date}>
         <div className="calendar">
-          <DatePicker.Calendar>
-            {({ weekNumber }) => (
-              <div className="week">
-                <p className="week-number">{weekNumber}</p>
-                <DatePicker.Week>
-                  <div className="day">
-                    <DatePicker.Day>
-                      {({
-                        onClick: onDayClick,
-                        date: dayDate,
-                        belongsToSelectedMonth,
-                        isSelectionnedDate,
-                        isCurrentDate,
-                      }) => (
-                        <button
-                          className={clsx({
-                            selectionned: isSelectionnedDate,
-                            today: isCurrentDate,
-                            month: belongsToSelectedMonth,
-                          })}
-                          onClick={onDayClick}
-                        >
-                          {dayDate.date()}
-                        </button>
-                      )}
-                    </DatePicker.Day>
-                  </div>
-                </DatePicker.Week>
-              </div>
-            )}
-          </DatePicker.Calendar>
+          <MyCalendar />
         </div>
       </DatePicker.Root>
     </>
