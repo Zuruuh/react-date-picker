@@ -1,4 +1,4 @@
-import './Slack.stories.scss';
+import styles from './Slack.stories.module.scss';
 import { Story } from '@ladle/react';
 import type { Dayjs } from 'dayjs';
 import { useCallback, useState } from 'react';
@@ -16,7 +16,7 @@ export const Slack: Story = () => {
   }, [setShowCalendar]);
 
   return (
-    <div id="date-picker">
+    <div id="date-picker" className={styles.datePicker}>
       <DatePicker.Root selectedDate={date} setSelectedDate={setDate}>
         {useCallback(
           ({
@@ -25,18 +25,18 @@ export const Slack: Story = () => {
             dayjs,
           }: DatePickerState) => (
             <>
-              <div className="header">
-                <button className="control">⬅️</button>
-                <button className="date" onClick={toggleCalendar}>
+              <div className={styles.header}>
+                <button className={styles.control}>⬅️</button>
+                <button className={styles.date} onClick={toggleCalendar}>
                   {showCalendar
                     ? temporarySelectedDate.format('MMMM YYYY')
                     : temporarySelectedDate.format('YYYY')}
                   ⬇️
                 </button>
-                <button className="control">➡️</button>
+                <button className={styles.control}>➡️</button>
               </div>
               {showCalendar ? (
-                <div className="calendar">
+                <div className={styles.calendar}>
                   <DatePicker.Calendar>
                     <DatePicker.Week>
                       <DatePicker.Day>
@@ -54,10 +54,10 @@ export const Slack: Story = () => {
                               <button
                                 aria-label={alt}
                                 className={clsx({
-                                  isBeforeToday,
-                                  isToday,
-                                  isSelected,
-                                  day: true,
+                                  [styles.isBeforeToday]: isBeforeToday,
+                                  [styles.isToday]: isToday,
+                                  [styles.isSelected]: isSelected,
+                                  [styles.day]: true,
                                 })}
                                 disabled={isBeforeToday}
                                 onClick={onDayClick}
@@ -65,7 +65,9 @@ export const Slack: Story = () => {
                                 {date.date()}
                               </button>
                             ) : (
-                              <div className="day placeholder"></div>
+                              <div
+                                className={`${styles.day} ${styles.placeholder}`}
+                              ></div>
                             )}
                           </>
                         )}
@@ -74,15 +76,18 @@ export const Slack: Story = () => {
                   </DatePicker.Calendar>
                 </div>
               ) : (
-                <div className="months">
+                <div className={styles.months}>
                   {Array.from({ length: 12 }).map((_, i) => (
                     <button
                       className={clsx({
-                        month: true,
-                        isBeforeToday: dayjs().month(i).isBefore(dayjs()),
+                        [styles.month]: true,
+                        [styles.isBeforeToday]: dayjs()
+                          .month(i)
+                          .isBefore(dayjs()),
                         // isTooFarAway: dayjs().month(i)
-                        isToday: i === dayjs().month(),
-                        isSelected: temporarySelectedDate.month() === i,
+                        [styles.isToday]: i === dayjs().month(),
+                        [styles.isSelected]:
+                          temporarySelectedDate.month() === i,
                       })}
                       key={`month-${i}`}
                       onClick={() =>
