@@ -5,6 +5,7 @@ import { useCallback, useState } from 'react';
 import { DatePicker } from '../../';
 import type { DatePickerState, DayInnerProps } from '../../';
 import clsx from 'clsx';
+import dayjs from 'dayjs';
 
 // Reproduction of slack's date picker
 export const Slack: Story = () => {
@@ -17,7 +18,11 @@ export const Slack: Story = () => {
 
   return (
     <div id="date-picker" className={styles.datePicker}>
-      <DatePicker.Root selectedDate={date} setSelectedDate={setDate}>
+      <DatePicker.Root
+        selectedDate={date}
+        setSelectedDate={setDate}
+        minimumSelectableDate={dayjs().subtract(1, 'day')}
+      >
         {useCallback(
           ({
             temporarySelectedDate,
@@ -43,7 +48,7 @@ export const Slack: Story = () => {
                         {({
                           belongsToSelectedMonth,
                           date,
-                          isBeforeToday,
+                          isOutOfRange,
                           isToday,
                           isSelected,
                           onClick: onDayClick,
@@ -54,12 +59,12 @@ export const Slack: Story = () => {
                               <button
                                 aria-label={alt}
                                 className={clsx({
-                                  [styles.isBeforeToday]: isBeforeToday,
+                                  [styles.isOutOfRange]: isOutOfRange,
                                   [styles.isToday]: isToday,
                                   [styles.isSelected]: isSelected,
                                   [styles.day]: true,
                                 })}
-                                disabled={isBeforeToday}
+                                disabled={isOutOfRange}
                                 onClick={onDayClick}
                               >
                                 {date.date()}
@@ -81,10 +86,9 @@ export const Slack: Story = () => {
                     <button
                       className={clsx({
                         [styles.month]: true,
-                        [styles.isBeforeToday]: dayjs()
+                        [styles.isOutOfRange]: dayjs()
                           .month(i)
                           .isBefore(dayjs()),
-                        // isTooFarAway: dayjs().month(i)
                         [styles.isToday]: i === dayjs().month(),
                         [styles.isSelected]:
                           temporarySelectedDate.month() === i,

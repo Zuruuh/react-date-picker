@@ -25,34 +25,41 @@
 
 .day {
   display: flex;
-}
+ 
+  button {
+    width: 30px;
+    height: 30px;
+    color: #c5c5c5;
+    border: 0;
+    background: transparent;
+    border-radius: 5px;
 
-.day button {
-  width: 30px;
-  height: 30px;
-  color: #c5c5c5;
-  border: 0;
-  background: transparent;
-  border-radius: 5px;
-}
+    &:disabled {
+      color: #b5b5b5;
+      cursor: not-allowed;
+    }
 
-.day button:hover {
-  background-color: #eee;
-}
+    &:not(:disabled) {
+      &:hover {
+        background-color: #eee;
+      }
 
-.day button.month {
-  color: black;
-}
+      &.month {
+        color: black;
+      }
 
-.day button.today {
-  font-weight: bold;
-}
+      &.today {
+        font-weight: bold;
+      }
 
-.day button.selectionned { 
-  color: white;
-  background-color: #0f6fde;
-}
+      &.selectionned {
+        color: white;
+        background-color: #0f6fde;
 
-.day button.selectionned:hover {
-  background-color: #1d5d90;
+        &:hover {
+          background-color: #1d5d90;
+        }
+      }
+    }
+  }
 }

@@ -7,9 +7,9 @@ import { useDatePickerContext } from '../context/DatePickerContext';
 export interface DayInnerProps {
   onClick(): void;
   isToday: boolean;
-  isBeforeToday: boolean;
   isSelected: boolean;
   belongsToSelectedMonth: boolean;
+  isOutOfRange: boolean;
   date: Dayjs;
   alt: string;
 }
@@ -24,20 +24,44 @@ export const Day: FC<DayProps> = ({ children }) => {
     setSelectedDate,
     temporarySelectedDate,
     setTemporarySelectedDate,
+    minimumSelectableDate,
+    maximumSelectableDate,
     dayjs,
   } = useDatePickerContext();
   const { date } = useDayContext();
 
   const onClick = useCallback(() => {
+    if (
+      date.isAfter(maximumSelectableDate) ||
+      date.isBefore(minimumSelectableDate)
+    ) {
+      console.error(
+        `Tried to set a date (${date.toString()}) out of range (${minimumSelectableDate.format(
+          'D/MM/YYYY'
+        )}-${maximumSelectableDate.format(
+          'D/MM/YYYY'
+        )}). You should not bind the \`onClick\` callback when it's not supposed to be called`
+      );
+
+      return;
+    }
+
     setSelectedDate(date);
     setTemporarySelectedDate(date);
-  }, [setSelectedDate, date, setTemporarySelectedDate]);
+  }, [
+    setSelectedDate,
+    date,
+    setTemporarySelectedDate,
+    minimumSelectableDate,
+    maximumSelectableDate,
+  ]);
 
   const isToday = date.toString() === dayjs().startOf('day').toString();
   const isSelected = date.toString() === selectedDate?.toString();
   const belongsToSelectedMonth =
     date.get('month') === temporarySelectedDate.month();
-  const isBeforeToday = date.isBefore(dayjs());
+  const isOutOfRange =
+    date.isBefore(minimumSelectableDate) || date.isAfter(maximumSelectableDate);
   const alt = date.format('dddd D MMMM YYYY');
 
   return (
@@ -45,9 +69,9 @@ export const Day: FC<DayProps> = ({ children }) => {
       {children({
         onClick,
         isToday,
-        isBeforeToday,
         isSelected,
         belongsToSelectedMonth,
+        isOutOfRange,
         date,
         alt,
       })}

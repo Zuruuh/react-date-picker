@@ -7,6 +7,8 @@ export interface DatePickerState {
   setSelectedDate: Setter<Dayjs | null>;
   temporarySelectedDate: Dayjs;
   setTemporarySelectedDate: Setter<Dayjs>;
+  minimumSelectableDate: Dayjs;
+  maximumSelectableDate: Dayjs;
   dayjs(): Dayjs;
 }
 
