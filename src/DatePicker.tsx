@@ -15,6 +15,8 @@ export interface DatePickerProps {
   selectedDate: Dayjs | null;
   setSelectedDate: Setter<Dayjs | null>;
   dayjs?(): Dayjs;
+  minimumSelectableDate?: Dayjs;
+  maximumSelectableDate?: Dayjs;
   children: ReactNode | ((props: DatePickerState) => ReactNode);
 }
 
@@ -22,6 +24,8 @@ const DatePicker: FC<DatePickerProps> = ({
   children,
   selectedDate,
   setSelectedDate,
+  minimumSelectableDate,
+  maximumSelectableDate,
   dayjs = () => day().utc(true).startOf('day'),
 }) => {
   const [temporarySelectedDate, setTemporarySelectedDate] = useState(dayjs());
@@ -31,6 +35,8 @@ const DatePicker: FC<DatePickerProps> = ({
     setSelectedDate,
     temporarySelectedDate,
     setTemporarySelectedDate,
+    minimumSelectableDate: minimumSelectableDate ?? dayjs().year(0),
+    maximumSelectableDate: maximumSelectableDate ?? dayjs().year(99999),
     dayjs,
   };
 
