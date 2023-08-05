@@ -1,4 +1,4 @@
-import './Basic.stories.scss';
+import styles from './Basic.stories.module.scss';
 import { useCallback, useState } from 'react';
 import type { FC } from 'react';
 import { DatePicker } from '../';
@@ -15,14 +15,14 @@ const MyCustomCalendar: FC<{ showWeekNumbers: boolean }> = ({
     <DatePicker.Calendar>
       {useCallback(
         ({ weekNumber }: CalendarInnerProps) => (
-          <div className="week">
+          <div className={styles.week}>
             {showWeekNumbers ? (
-              <p className="week-number">{weekNumber}</p>
+              <p className={styles.weekNumber}>{weekNumber}</p>
             ) : (
               <></>
             )}
             <DatePicker.Week>
-              <div className="day">
+              <div className={styles.day}>
                 <DatePicker.Day>
                   {({
                     onClick: onDayClick,
@@ -33,9 +33,9 @@ const MyCustomCalendar: FC<{ showWeekNumbers: boolean }> = ({
                   }) => (
                     <button
                       className={clsx({
-                        selectionned: isSelected,
-                        today: isToday,
-                        month: belongsToSelectedMonth,
+                        [styles.selectionned]: isSelected,
+                        [styles.today]: isToday,
+                        [styles.month]: belongsToSelectedMonth,
                       })}
                       onClick={onDayClick}
                     >
@@ -60,7 +60,7 @@ export const Simple: Story = () => {
     <>
       <p>The current selected date is: {date?.toString()}</p>
       <DatePicker.Root setSelectedDate={setDate} selectedDate={date}>
-        <div className="calendar">
+        <div className={styles.calendar}>
           <MyCustomCalendar showWeekNumbers={false} />
         </div>
       </DatePicker.Root>
@@ -75,7 +75,7 @@ export const WithWeekNumbers: Story = () => {
     <>
       <p>The current selected date is: {date?.toString()}</p>
       <DatePicker.Root setSelectedDate={setDate} selectedDate={date}>
-        <div className="calendar">
+        <div className={styles.calendar}>
           <MyCustomCalendar showWeekNumbers={true} />
         </div>
       </DatePicker.Root>
