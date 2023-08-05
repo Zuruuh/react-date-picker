@@ -1,5 +1,6 @@
-import './Basic.stories.css';
-import { FC, useCallback, useState } from 'react';
+import './Basic.stories.scss';
+import { useCallback, useState } from 'react';
+import type { FC } from 'react';
 import { DatePicker } from '../';
 import type { CalendarInnerProps } from '../';
 import type { Story } from '@ladle/react';
@@ -27,13 +28,13 @@ const MyCustomCalendar: FC<{ showWeekNumbers: boolean }> = ({
                     onClick: onDayClick,
                     date: dayDate,
                     belongsToSelectedMonth,
-                    isSelectionnedDate,
-                    isCurrentDate,
+                    isSelected,
+                    isToday,
                   }) => (
                     <button
                       className={clsx({
-                        selectionned: isSelectionnedDate,
-                        today: isCurrentDate,
+                        selectionned: isSelected,
+                        today: isToday,
                         month: belongsToSelectedMonth,
                       })}
                       onClick={onDayClick}

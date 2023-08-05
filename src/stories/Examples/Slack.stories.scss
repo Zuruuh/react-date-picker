@@ -1,0 +1,100 @@
+* {
+  font-family: 'Poppins';
+  box-sizing: border-box;
+}
+
+#date-picker {
+  background-color: #222529;
+  box-sizing: border-box;
+  width: fit-content;
+  border-radius: 6px;
+  box-shadow: 0 0 0 1px rgba(29, 28, 29, 0.13), 0 4px 12px 0 #00000014;
+  padding: 16px;
+  height: 372px;
+  width: 333px;
+}
+
+.calendar {
+  display: inline-grid;
+  grid-template-columns: repeat(7, 1fr); 
+}
+
+.months {
+  display: inline-grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 16px;
+
+  .control {
+    border: 0;
+    background-color: transparent;
+  }
+
+  .date {
+    color: #d1d2d3;
+    font-weight: 700;
+    background-color: transparent;
+    border: 0;
+    font-size: 15px;
+    border-radius: 4px;
+
+    &:hover,
+    &:focus {
+      background-color: #1B3644;
+    }
+
+    &:active {
+      background-color: #1264A3;
+    }
+  }
+}
+
+.day, .month {
+  width: 42px;
+  height: 44px;
+  font-size: 15px;
+  color: #fff;
+  margin: 0 -1px -1px 0;
+
+  &:not(.placeholder) {
+    background-color: #1A1D21;
+    border: solid 1px #828486;
+    cursor: pointer;
+
+    &:not(.isBeforeToday):not(.isSelected) {
+      &:hover,
+      &:focus {
+        background-color: #1B3644;
+        border-color: #2B637D;
+        z-index: 2;
+      }
+    }
+  }
+
+  &.isToday {
+    color: #1d9bd1;
+  }
+
+  &.isBeforeToday {
+    cursor: not-allowed;
+    background-color: #222529;
+    color: #828486;
+  }
+
+  &.isSelected {
+    background-color: #1264A3;
+
+    &.isToday {
+      color: #fff;
+    }
+  }
+}
+
+.month {
+  width: 101px;
+  height: 74px;
+}

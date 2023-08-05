@@ -6,10 +6,12 @@ import { useDatePickerContext } from '../context/DatePickerContext';
 
 export interface DayInnerProps {
   onClick(): void;
-  isCurrentDate: boolean;
-  isSelectionnedDate: boolean;
+  isToday: boolean;
+  isBeforeToday: boolean;
+  isSelected: boolean;
   belongsToSelectedMonth: boolean;
   date: Dayjs;
+  alt: string;
 }
 
 export interface DayProps {
@@ -31,19 +33,23 @@ export const Day: FC<DayProps> = ({ children }) => {
     setTemporarySelectedDate(date);
   }, [setSelectedDate, date, setTemporarySelectedDate]);
 
-  const isCurrentDate = date.toString() === dayjs().startOf('day').toString();
-  const isSelectionnedDate = date.toString() === selectedDate?.toString();
+  const isToday = date.toString() === dayjs().startOf('day').toString();
+  const isSelected = date.toString() === selectedDate?.toString();
   const belongsToSelectedMonth =
     date.get('month') === temporarySelectedDate.month();
+  const isBeforeToday = date.isBefore(dayjs());
+  const alt = date.format('dddd D MMMM YYYY');
 
   return (
     <>
       {children({
         onClick,
-        isCurrentDate,
-        isSelectionnedDate,
+        isToday,
+        isBeforeToday,
+        isSelected,
         belongsToSelectedMonth,
         date,
+        alt,
       })}
     </>
   );
