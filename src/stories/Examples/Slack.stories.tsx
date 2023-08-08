@@ -26,6 +26,7 @@ export const Slack: Story = () => {
       >
         {useCallback(
           ({
+            selectedDate,
             temporarySelectedDate,
             setTemporarySelectedDate,
             controls: { prevMonth, nextMonth, prevYear, nextYear },
@@ -120,32 +121,57 @@ export const Slack: Story = () => {
                     </button>
                   </div>
                   <div className={styles.months}>
-                    {Array.from({ length: 12 }).map((_, i) => (
-                      <button
-                        className={clsx({
-                          [styles.month]: true,
-                          [styles.isToday]: i === dayjs().month(),
-                          [styles.isSelected]:
-                            temporarySelectedDate.month() === i,
-                        })}
-                        disabled={
-                          temporarySelectedDate
-                            .month(i)
-                            .isBefore(minimumSelectableDate) ||
-                          temporarySelectedDate
-                            .month(i)
-                            .isAfter(maximumSelectableDate)
-                        }
-                        key={`month-${i}`}
-                        onClick={() =>
-                          setTemporarySelectedDate(
-                            temporarySelectedDate.month(i)
-                          )
-                        }
-                      >
-                        {dayjs().month(i).format('MMMM')}
-                      </button>
-                    ))}
+                    {Array.from({ length: 12 }).map((_, i) => {
+                      const date = temporarySelectedDate.month(i);
+
+                      return (
+                        <button
+                          className={clsx(styles.month, {
+                            [styles.isToday]:
+                              dayjs().format('MM YYYY') ===
+                              date.format('MM YYYY'),
+                            [styles.isSelected]:
+                              selectedDate?.format('MM YYYY') ===
+                              temporarySelectedDate.format('MM YYYY'),
+                          })}
+                          onClick={() => setTemporarySelectedDate(date)}
+                          key={date.format('MM YYYY')}
+                        >
+                          {date.format('MMMM')}
+                        </button>
+                      );
+                      //   <button
+                      //     className={clsx({
+                      //       [styles.month]: true,
+                      //       [styles.isToday]:
+                      //         i === dayjs().month() &&
+                      //         temporarySelectedDate.year() === dayjs().year(),
+                      //       [styles.isSelected]:
+                      //         temporarySelectedDate.month(i).format('MM YYYY') ===
+                      //         temporarySelectedDate.format('MM YYYY'),
+                      //     })}
+                      //     disabled={
+                      //       console.log(
+                      //         temporarySelectedDate.month(i).toString(),
+                      //         minimumSelectableDate.startOf('month').toString()
+                      //       ) ||
+                      //       temporarySelectedDate
+                      //         .month(i)
+                      //         .isBefore(minimumSelectableDate.startOf('month')) ||
+                      //       temporarySelectedDate
+                      //         .month(i)
+                      //         .isAfter(maximumSelectableDate.endOf('month'))
+                      //     }
+                      //     key={`month-${i}`}
+                      //     onClick={() =>
+                      //       setTemporarySelectedDate(
+                      //         temporarySelectedDate.month(i)
+                      //       )
+                      //     }
+                      //   >
+                      //     {dayjs().month(i).format('MMMM')}
+                      //   </button>
+                    })}
                   </div>
                 </>
               )}

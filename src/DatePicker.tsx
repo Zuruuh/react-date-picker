@@ -24,14 +24,14 @@ export interface DatePickerProps {
 function useControlFactory(date: Dayjs, setDate: (date: Dayjs) => unknown) {
   return useCallback(
     (positive: boolean, unit: 'month' | 'year', referenceDate: Dayjs) => {
-      const modifiedDate = positive
-        ? date.add(1, unit)
-        : date.subtract(1, unit);
+      const modifiedDate = (
+        positive ? date.add(1, unit) : date.subtract(1, unit)
+      ).date(1);
 
       return {
         disabled: positive
-          ? modifiedDate.isAfter(referenceDate)
-          : modifiedDate.isBefore(referenceDate),
+          ? modifiedDate.isAfter(referenceDate.endOf(unit))
+          : modifiedDate.isBefore(referenceDate.startOf(unit)),
         execute(): void {
           setDate(modifiedDate);
         },
@@ -47,22 +47,37 @@ const DatePicker: FC<DatePickerProps> = ({
   setSelectedDate,
   minimumSelectableDate,
   maximumSelectableDate,
-  dayjs = () => day().utc(true).startOf('day'),
+  dayjs = () => day(),
 }) => {
-  const [temporarySelectedDate, setTemporarySelectedDate] = useState(dayjs());
+  const dayFactory = () => dayjs().utc(true).second(0).minute(0).hour(12);
+  const [temporarySelectedDate, setTemporarySelectedDate] = useState(
+    dayFactory().day(1)
+  );
+  const setTemporarySelectedDateDecorator: Setter<Dayjs> = (date) => {
+    const unwrappedDate =
+      typeof date === 'function' ? date(temporarySelectedDate) : date;
+    return setTemporarySelectedDate(unwrappedDate.date(1));
+  };
+
   const controlFactory = useControlFactory(
     temporarySelectedDate,
-    setTemporarySelectedDate
+    setTemporarySelectedDateDecorator
   );
 
-  minimumSelectableDate = minimumSelectableDate ?? dayjs().year(0);
-  maximumSelectableDate = maximumSelectableDate ?? dayjs().year(99999);
+  minimumSelectableDate = (minimumSelectableDate ?? dayFactory().year(0))
+    .second(0)
+    .minute(0)
+    .hour(12);
+  maximumSelectableDate = (maximumSelectableDate ?? dayFactory().year(99999))
+    .second(0)
+    .minute(0)
+    .hour(12);
 
   const props: DatePickerState = {
     selectedDate,
     setSelectedDate,
     temporarySelectedDate,
-    setTemporarySelectedDate,
+    setTemporarySelectedDate: setTemporarySelectedDateDecorator,
     minimumSelectableDate,
     maximumSelectableDate,
     controls: {
@@ -71,7 +86,7 @@ const DatePicker: FC<DatePickerProps> = ({
       prevMonth: controlFactory(false, 'month', minimumSelectableDate),
       prevYear: controlFactory(false, 'year', minimumSelectableDate),
     },
-    dayjs,
+    dayjs: dayFactory,
   };
 
   return (
