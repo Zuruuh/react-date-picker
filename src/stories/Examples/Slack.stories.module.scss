@@ -65,7 +65,7 @@
     border: solid 1px #828486;
     cursor: pointer;
 
-    &:not(.isOutOfRange):not(.isSelected) {
+    &:not(:disabled):not(.isSelected) {
       &:hover,
       &:focus {
         background-color: #1B3644;
@@ -79,7 +79,7 @@
     color: #1d9bd1;
   }
 
-  &.isOutOfRange {
+  &:disabled {
     cursor: not-allowed;
     background-color: #222529;
     color: #828486;

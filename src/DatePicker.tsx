@@ -1,9 +1,7 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import type { ReactNode, FC } from 'react';
-import {
-  DatePickerContext,
-  DatePickerState,
-} from './context/DatePickerContext';
+import { DatePickerContext } from './context/DatePickerContext';
+import type { DatePickerState } from './context/DatePickerContext';
 import { Calendar } from './components/Calendar';
 import { Setter } from './types/setter';
 import { Week } from './components/Week';
@@ -20,6 +18,29 @@ export interface DatePickerProps {
   children: ReactNode | ((props: DatePickerState) => ReactNode);
 }
 
+/**
+ * @internal
+ */
+function useControlFactory(date: Dayjs, setDate: (date: Dayjs) => unknown) {
+  return useCallback(
+    (positive: boolean, unit: 'month' | 'year', referenceDate: Dayjs) => {
+      const modifiedDate = positive
+        ? date.add(1, unit)
+        : date.subtract(1, unit);
+
+      return {
+        disabled: positive
+          ? modifiedDate.isAfter(referenceDate)
+          : modifiedDate.isBefore(referenceDate),
+        execute(): void {
+          setDate(modifiedDate);
+        },
+      };
+    },
+    [date, setDate]
+  );
+}
+
 const DatePicker: FC<DatePickerProps> = ({
   children,
   selectedDate,
@@ -29,14 +50,27 @@ const DatePicker: FC<DatePickerProps> = ({
   dayjs = () => day().utc(true).startOf('day'),
 }) => {
   const [temporarySelectedDate, setTemporarySelectedDate] = useState(dayjs());
+  const controlFactory = useControlFactory(
+    temporarySelectedDate,
+    setTemporarySelectedDate
+  );
+
+  minimumSelectableDate = minimumSelectableDate ?? dayjs().year(0);
+  maximumSelectableDate = maximumSelectableDate ?? dayjs().year(99999);
 
   const props: DatePickerState = {
     selectedDate,
     setSelectedDate,
     temporarySelectedDate,
     setTemporarySelectedDate,
-    minimumSelectableDate: minimumSelectableDate ?? dayjs().year(0),
-    maximumSelectableDate: maximumSelectableDate ?? dayjs().year(99999),
+    minimumSelectableDate,
+    maximumSelectableDate,
+    controls: {
+      nextMonth: controlFactory(true, 'month', maximumSelectableDate),
+      nextYear: controlFactory(true, 'year', maximumSelectableDate),
+      prevMonth: controlFactory(false, 'month', minimumSelectableDate),
+      prevYear: controlFactory(false, 'year', minimumSelectableDate),
+    },
     dayjs,
   };
 
