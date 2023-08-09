@@ -122,55 +122,39 @@ export const Slack: Story = () => {
                   </div>
                   <div className={styles.months}>
                     {Array.from({ length: 12 }).map((_, i) => {
-                      const date = temporarySelectedDate.month(i);
+                      const month = temporarySelectedDate
+                        .month(i)
+                        .startOf('month');
+                      console.log(temporarySelectedDate.toString());
+                      console.log(month.toString());
 
                       return (
                         <button
                           className={clsx(styles.month, {
                             [styles.isToday]:
                               dayjs().format('MM YYYY') ===
-                              date.format('MM YYYY'),
+                              month.format('MM YYYY'),
                             [styles.isSelected]:
                               selectedDate?.format('MM YYYY') ===
-                              temporarySelectedDate.format('MM YYYY'),
+                              month.format('MM YYYY'),
                           })}
-                          onClick={() => setTemporarySelectedDate(date)}
-                          key={date.format('MM YYYY')}
+                          disabled={
+                            ![
+                              minimumSelectableDate.format('MM YYYY'),
+                              maximumSelectableDate.format('MM YYY'),
+                            ].includes(month.format('MM YYYY')) &&
+                            (month.isAfter(maximumSelectableDate) ||
+                              month.isBefore(minimumSelectableDate))
+                          }
+                          onClick={() => {
+                            setTemporarySelectedDate(month);
+                            setShowCalendar(true);
+                          }}
+                          key={month.format('MM YYYY')}
                         >
-                          {date.format('MMMM')}
+                          {month.format('MMMM')}
                         </button>
                       );
-                      //   <button
-                      //     className={clsx({
-                      //       [styles.month]: true,
-                      //       [styles.isToday]:
-                      //         i === dayjs().month() &&
-                      //         temporarySelectedDate.year() === dayjs().year(),
-                      //       [styles.isSelected]:
-                      //         temporarySelectedDate.month(i).format('MM YYYY') ===
-                      //         temporarySelectedDate.format('MM YYYY'),
-                      //     })}
-                      //     disabled={
-                      //       console.log(
-                      //         temporarySelectedDate.month(i).toString(),
-                      //         minimumSelectableDate.startOf('month').toString()
-                      //       ) ||
-                      //       temporarySelectedDate
-                      //         .month(i)
-                      //         .isBefore(minimumSelectableDate.startOf('month')) ||
-                      //       temporarySelectedDate
-                      //         .month(i)
-                      //         .isAfter(maximumSelectableDate.endOf('month'))
-                      //     }
-                      //     key={`month-${i}`}
-                      //     onClick={() =>
-                      //       setTemporarySelectedDate(
-                      //         temporarySelectedDate.month(i)
-                      //       )
-                      //     }
-                      //   >
-                      //     {dayjs().month(i).format('MMMM')}
-                      //   </button>
                     })}
                   </div>
                 </>
