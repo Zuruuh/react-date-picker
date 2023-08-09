@@ -14,43 +14,40 @@ const MyCustomCalendar: FC<{ showWeekNumbers: boolean }> = ({
 }) => {
   return (
     <DatePicker.Calendar>
-      {useCallback(
-        ({ weekNumber }: CalendarInnerProps) => (
-          <div className={styles.week}>
-            {showWeekNumbers ? (
-              <p className={styles.weekNumber}>{weekNumber}</p>
-            ) : (
-              <></>
-            )}
-            <DatePicker.Week>
-              <div className={styles.day}>
-                <DatePicker.Day>
-                  {({
-                    onClick: onDayClick,
-                    date: dayDate,
-                    belongsToSelectedMonth,
-                    isSelected,
-                    isOutOfRange,
-                    isToday,
-                  }) => (
-                    <button
-                      className={clsx({
-                        [styles.selectionned]: isSelected,
-                        [styles.today]: isToday,
-                        [styles.month]: belongsToSelectedMonth,
-                      })}
-                      disabled={isOutOfRange}
-                      onClick={onDayClick}
-                    >
-                      {dayDate.date()}
-                    </button>
-                  )}
-                </DatePicker.Day>
-              </div>
-            </DatePicker.Week>
-          </div>
-        ),
-        [showWeekNumbers]
+      {({ weekNumber }: CalendarInnerProps) => (
+        <div className={styles.week}>
+          {showWeekNumbers ? (
+            <p className={styles.weekNumber}>{weekNumber}</p>
+          ) : (
+            <></>
+          )}
+          <DatePicker.Week>
+            <div className={styles.day}>
+              <DatePicker.Day>
+                {({
+                  onClick: onDayClick,
+                  date: dayDate,
+                  belongsToSelectedMonth,
+                  isSelected,
+                  isOutOfRange,
+                  isToday,
+                }) => (
+                  <button
+                    className={clsx({
+                      [styles.selectionned]: isSelected,
+                      [styles.today]: isToday,
+                      [styles.month]: belongsToSelectedMonth,
+                    })}
+                    disabled={isOutOfRange}
+                    onClick={onDayClick}
+                  >
+                    {dayDate.date()}
+                  </button>
+                )}
+              </DatePicker.Day>
+            </div>
+          </DatePicker.Week>
+        </div>
       )}
     </DatePicker.Calendar>
   );
@@ -65,9 +62,27 @@ export const Simple: Story = () => {
         The current selected date is: {date?.toString() ?? '(not selected yet)'}
       </p>
       <DatePicker.Root setSelectedDate={setDate} selectedDate={date}>
-        <div className={styles.calendar}>
-          <MyCustomCalendar showWeekNumbers={false} />
-        </div>
+        {({ controls }) => (
+          <>
+            <div>
+              <button
+                disabled={controls.prevMonth.disabled}
+                onClick={controls.prevMonth.execute}
+              >
+                prev month
+              </button>
+              <button
+                disabled={controls.nextMonth.disabled}
+                onClick={controls.nextMonth.execute}
+              >
+                next month
+              </button>
+            </div>
+            <div className={styles.calendar}>
+              <MyCustomCalendar showWeekNumbers={false} />
+            </div>
+          </>
+        )}
       </DatePicker.Root>
     </>
   );

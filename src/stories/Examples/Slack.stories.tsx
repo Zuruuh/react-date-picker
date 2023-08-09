@@ -22,86 +22,142 @@ export const Slack: Story = () => {
         selectedDate={date}
         setSelectedDate={setDate}
         minimumSelectableDate={dayjs().subtract(1, 'day')}
+        maximumSelectableDate={dayjs().add(1, 'year')}
       >
         {useCallback(
           ({
+            selectedDate,
             temporarySelectedDate,
             setTemporarySelectedDate,
+            controls: { prevMonth, nextMonth, prevYear, nextYear },
+            minimumSelectableDate,
+            maximumSelectableDate,
             dayjs,
           }: DatePickerState) => (
             <>
-              <div className={styles.header}>
-                <button className={styles.control}>⬅️</button>
-                <button className={styles.date} onClick={toggleCalendar}>
-                  {showCalendar
-                    ? temporarySelectedDate.format('MMMM YYYY')
-                    : temporarySelectedDate.format('YYYY')}
-                  ⬇️
-                </button>
-                <button className={styles.control}>➡️</button>
-              </div>
               {showCalendar ? (
-                <div className={styles.calendar}>
-                  <DatePicker.Calendar>
-                    <DatePicker.Week>
-                      <DatePicker.Day>
-                        {({
-                          belongsToSelectedMonth,
-                          date,
-                          isOutOfRange,
-                          isToday,
-                          isSelected,
-                          onClick: onDayClick,
-                          alt,
-                        }: DayInnerProps) => (
-                          <>
-                            {belongsToSelectedMonth ? (
-                              <button
-                                aria-label={alt}
-                                className={clsx({
-                                  [styles.isOutOfRange]: isOutOfRange,
-                                  [styles.isToday]: isToday,
-                                  [styles.isSelected]: isSelected,
-                                  [styles.day]: true,
-                                })}
-                                disabled={isOutOfRange}
-                                onClick={onDayClick}
-                              >
-                                {date.date()}
-                              </button>
-                            ) : (
-                              <div
-                                className={`${styles.day} ${styles.placeholder}`}
-                              ></div>
-                            )}
-                          </>
-                        )}
-                      </DatePicker.Day>
-                    </DatePicker.Week>
-                  </DatePicker.Calendar>
-                </div>
-              ) : (
-                <div className={styles.months}>
-                  {Array.from({ length: 12 }).map((_, i) => (
+                <>
+                  <div className={styles.header}>
                     <button
-                      className={clsx({
-                        [styles.month]: true,
-                        [styles.isOutOfRange]: dayjs()
-                          .month(i)
-                          .isBefore(dayjs()),
-                        [styles.isToday]: i === dayjs().month(),
-                        [styles.isSelected]:
-                          temporarySelectedDate.month() === i,
-                      })}
-                      key={`month-${i}`}
-                      onClick={() =>
-                        setTemporarySelectedDate(temporarySelectedDate.month(i))
-                      }
+                      className={styles.control}
+                      disabled={prevMonth.disabled}
+                      onClick={prevMonth.execute}
                     >
-                      {dayjs().month(i).format('MMMM')}
+                      ⬅️
                     </button>
-                  ))}
-                </div>
+                    <button className={styles.date} onClick={toggleCalendar}>
+                      {temporarySelectedDate.format('MMMM YYYY')}
+                      ⬇️
+                    </button>
+                    <button
+                      className={styles.control}
+                      disabled={nextMonth.disabled}
+                      onClick={nextMonth.execute}
+                    >
+                      ➡️
+                    </button>
+                  </div>
+
+                  <div className={styles.calendar}>
+                    <DatePicker.Calendar>
+                      <DatePicker.Week>
+                        <DatePicker.Day>
+                          {({
+                            belongsToSelectedMonth,
+                            date,
+                            isOutOfRange,
+                            isToday,
+                            isSelected,
+                            onClick: onDayClick,
+                            alt,
+                          }: DayInnerProps) => (
+                            <>
+                              {belongsToSelectedMonth ? (
+                                <button
+                                  aria-label={alt}
+                                  className={clsx({
+                                    [styles.isOutOfRange]: isOutOfRange,
+                                    [styles.isToday]: isToday,
+                                    [styles.isSelected]: isSelected,
+                                    [styles.day]: true,
+                                  })}
+                                  disabled={isOutOfRange}
+                                  onClick={onDayClick}
+                                >
+                                  {date.date()}
+                                </button>
+                              ) : (
+                                <div
+                                  className={`${styles.day} ${styles.placeholder}`}
+                                ></div>
+                              )}
+                            </>
+                          )}
+                        </DatePicker.Day>
+                      </DatePicker.Week>
+                    </DatePicker.Calendar>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className={styles.header}>
+                    <button
+                      className={styles.control}
+                      disabled={prevYear.disabled}
+                      onClick={prevYear.execute}
+                    >
+                      ⬅️
+                    </button>
+                    <button className={styles.date} onClick={toggleCalendar}>
+                      {temporarySelectedDate.format('YYYY')}
+                      ⬇️
+                    </button>
+                    <button
+                      className={styles.control}
+                      disabled={nextYear.disabled}
+                      onClick={nextYear.execute}
+                    >
+                      ➡️
+                    </button>
+                  </div>
+                  <div className={styles.months}>
+                    {Array.from({ length: 12 }).map((_, i) => {
+                      const month = temporarySelectedDate
+                        .month(i)
+                        .startOf('month');
+                      console.log(temporarySelectedDate.toString());
+                      console.log(month.toString());
+
+                      return (
+                        <button
+                          className={clsx(styles.month, {
+                            [styles.isToday]:
+                              dayjs().format('MM YYYY') ===
+                              month.format('MM YYYY'),
+                            [styles.isSelected]:
+                              selectedDate?.format('MM YYYY') ===
+                              month.format('MM YYYY'),
+                          })}
+                          disabled={
+                            ![
+                              minimumSelectableDate.format('MM YYYY'),
+                              maximumSelectableDate.format('MM YYY'),
+                            ].includes(month.format('MM YYYY')) &&
+                            (month.isAfter(maximumSelectableDate) ||
+                              month.isBefore(minimumSelectableDate))
+                          }
+                          onClick={() => {
+                            setTemporarySelectedDate(month);
+                            setShowCalendar(true);
+                          }}
+                          key={month.format('MM YYYY')}
+                        >
+                          {month.format('MMMM')}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </>
               )}
             </>
           ),

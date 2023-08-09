@@ -12,8 +12,8 @@ export interface CalendarProps {
 }
 
 export const Calendar: FC<CalendarProps> = ({ children }) => {
-  const { selectedDate, temporarySelectedDate } = useDatePickerContext();
-  const referenceDate = selectedDate ?? temporarySelectedDate;
+  const { temporarySelectedDate } = useDatePickerContext();
+  const referenceDate = temporarySelectedDate;
   const startOfMonth = referenceDate.date(1).endOf('week');
 
   const createChildren = useCallback(
