@@ -10,6 +10,7 @@ export interface DayInnerProps {
   isSelected: boolean;
   belongsToSelectedMonth: boolean;
   isOutOfRange: boolean;
+  isOverlapPlaceholder: boolean;
   date: Dayjs;
   alt: string;
 }
@@ -26,6 +27,7 @@ export const Day: FC<DayProps> = ({ children }) => {
     setTemporarySelectedDate,
     minimumSelectableDate,
     maximumSelectableDate,
+    overlap,
     dayjs,
   } = useDatePickerContext();
   const { date } = useDayContext();
@@ -63,6 +65,9 @@ export const Day: FC<DayProps> = ({ children }) => {
   const isOutOfRange =
     date.isBefore(minimumSelectableDate) || date.isAfter(maximumSelectableDate);
   const alt = date.format('dddd D MMMM YYYY');
+  const isOverlapPlaceholder =
+    overlap === 'no-overlap-with-offset' &&
+    date.month() !== temporarySelectedDate.month();
 
   return (
     <>
@@ -72,6 +77,7 @@ export const Day: FC<DayProps> = ({ children }) => {
         isSelected,
         belongsToSelectedMonth,
         isOutOfRange,
+        isOverlapPlaceholder,
         date,
         alt,
       })}

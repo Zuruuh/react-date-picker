@@ -92,6 +92,10 @@
       color: #fff;
     }
   }
+
+  &.placeholder {
+    visibility: hidden;
+  }
 }
 
 .month {
