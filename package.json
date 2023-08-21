@@ -11,12 +11,12 @@
     "README.md",
     "LICENSE.txt"
   ],
-  "main": "dist/@zuruuh/react-date-picker.umd.cjs",
-  "module": "dist/@zuruuh/react-date-picker.js",
+  "main": "dist/react-date-picker.umd.cjs",
+  "module": "dist/react-date-picker.js",
   "exports": {
     ".": {
-      "import": "./dist/@zuruuh/react-date-picker.js",
-      "require": "./dist/@zuruuh/react-date-picker.umd.cjs"
+      "import": "./dist/react-date-picker.js",
+      "require": "./dist/react-date-picker.umd.cjs"
     }
   },
   "scripts": {
