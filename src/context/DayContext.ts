@@ -1,8 +1,16 @@
 import type { Dayjs } from 'dayjs';
 import { createContext, useContext } from 'react';
 
+export interface DayCorners {
+  topLeft: boolean;
+  topRight: boolean;
+  bottomLeft: boolean;
+  bottomRight: boolean;
+}
+
 export interface DayContextState {
   date: Dayjs;
+  corners: DayCorners;
 }
 
 /**

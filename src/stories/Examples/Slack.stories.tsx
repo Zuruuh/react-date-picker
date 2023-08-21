@@ -70,17 +70,31 @@ export const Slack: Story = () => {
                           isSelected,
                           onClick: onDayClick,
                           alt,
+                          corners,
                         }: DayInnerProps) => (
                           <>
                             <button
                               aria-label={alt}
                               className={clsx({
-                                [styles.isOutOfRange]: isOutOfRange,
                                 [styles.isToday]: isToday,
                                 [styles.isSelected]: isSelected,
                                 [styles.day]: true,
                                 [styles.placeholder]: isOffsetPlaceholder,
                               })}
+                              style={{
+                                borderTopLeftRadius: corners.topLeft
+                                  ? '8px'
+                                  : undefined,
+                                borderTopRightRadius: corners.topRight
+                                  ? '8px'
+                                  : undefined,
+                                borderBottomLeftRadius: corners.bottomLeft
+                                  ? '8px'
+                                  : undefined,
+                                borderBottomRightRadius: corners.bottomRight
+                                  ? '8px'
+                                  : undefined,
+                              }}
                               disabled={isOutOfRange}
                               onClick={onDayClick}
                             >
@@ -136,7 +150,7 @@ export const Slack: Story = () => {
                         disabled={
                           ![
                             minimumSelectableDate.format('MM YYYY'),
-                            maximumSelectableDate.format('MM YYY'),
+                            maximumSelectableDate.format('MM YYYY'),
                           ].includes(month.format('MM YYYY')) &&
                           (month.isAfter(maximumSelectableDate) ||
                             month.isBefore(minimumSelectableDate))

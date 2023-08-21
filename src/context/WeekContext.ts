@@ -3,6 +3,8 @@ import type { WeekNumber } from '../types/WeekNumber';
 
 export interface WeekContextState {
   weekNumbers: WeekNumber;
+  weekIndex: number;
+  totalWeeks: number;
 }
 
 /**

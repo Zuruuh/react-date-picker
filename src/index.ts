@@ -4,7 +4,7 @@ export type { DayInnerProps } from './components/Day';
 export type { CalendarInnerProps } from './components/Calendar';
 
 export type { WeekContextState } from './context/WeekContext';
-export type { DayContextState } from './context/DayContext';
+export type { DayContextState, DayCorners } from './context/DayContext';
 export type {
   DatePickerState,
   DatePickerControls,

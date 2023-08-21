@@ -1,8 +1,7 @@
-import { useCallback } from 'react';
-import type { FC, ReactNode } from 'react';
-import type { Dayjs } from 'dayjs';
-import { useDayContext } from '../context/DayContext';
+import { useCallback, type FC, type ReactNode } from 'react';
+import { type DayCorners, useDayContext } from '../context/DayContext';
 import { useDatePickerContext } from '../context/DatePickerContext';
+import type { Dayjs } from 'dayjs';
 
 export interface DayInnerProps {
   onClick(): void;
@@ -13,6 +12,7 @@ export interface DayInnerProps {
   isOverlapPlaceholder: boolean;
   date: Dayjs;
   alt: string;
+  corners: DayCorners;
 }
 
 export interface DayProps {
@@ -30,7 +30,7 @@ export const Day: FC<DayProps> = ({ children }) => {
     overlap,
     dayjs,
   } = useDatePickerContext();
-  const { date } = useDayContext();
+  const { date, corners } = useDayContext();
 
   const onClick = useCallback(() => {
     if (
@@ -59,12 +59,16 @@ export const Day: FC<DayProps> = ({ children }) => {
   ]);
 
   const isToday = date.toString() === dayjs().startOf('day').toString();
+
   const isSelected = date.toString() === selectedDate?.toString();
-  const belongsToSelectedMonth =
-    date.get('month') === temporarySelectedDate.month();
+
+  const belongsToSelectedMonth = date.month() === temporarySelectedDate.month();
+
   const isOutOfRange =
     date.isBefore(minimumSelectableDate) || date.isAfter(maximumSelectableDate);
+
   const alt = date.format('dddd D MMMM YYYY');
+
   const isOverlapPlaceholder =
     overlap === 'no-overlap-with-offset' &&
     date.month() !== temporarySelectedDate.month();
@@ -80,6 +84,7 @@ export const Day: FC<DayProps> = ({ children }) => {
         isOverlapPlaceholder,
         date,
         alt,
+        corners,
       })}
     </>
   );
