@@ -5,7 +5,12 @@ export type { CalendarInnerProps } from './components/Calendar';
 
 export type { WeekContextState } from './context/WeekContext';
 export type { DayContextState } from './context/DayContext';
-export type { DatePickerState } from './context/DatePickerContext';
+export type {
+  DatePickerState,
+  DatePickerControls,
+  DatePickerControl,
+  DatePickerCalendarOverlap,
+} from './context/DatePickerContext';
 
 export type { Setter } from './types/Setter';
-export type { WeekNumber } from './types/WeekNumber';
+export type { WeekNumber, WeekNumbers } from './types/WeekNumber';

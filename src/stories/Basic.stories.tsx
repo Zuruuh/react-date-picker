@@ -132,6 +132,28 @@ export const WithMinAndMaxRange: Story = () => {
   );
 };
 
+export const WithNoOverlap: Story = () => {
+  const [date, setDate] = useState<Dayjs | null>(null);
+
+  return (
+    <>
+      <p>
+        The current selected date is: {date?.toString() ?? '(not selected yet)'}
+      </p>
+      <DatePicker.Root
+        setSelectedDate={setDate}
+        selectedDate={date}
+        overlap="no-overlap"
+      >
+        <div className={styles.calendar}>
+          <MyCustomCalendar showWeekNumbers={false} />
+        </div>
+      </DatePicker.Root>
+    </>
+  );
+};
+
+WithNoOverlap.decorators = [withStrictMode];
 Simple.decorators = [withStrictMode];
 WithWeekNumbers.decorators = [withStrictMode];
 WithMinAndMaxRange.decorators = [withStrictMode];

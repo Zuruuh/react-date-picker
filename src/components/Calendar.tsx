@@ -8,7 +8,7 @@ import type { Dayjs } from 'dayjs';
 import type { WeekNumber, WeekNumbers } from '../types/WeekNumber';
 
 export interface CalendarInnerProps {
-  weekNumber: WeekNumber;
+  weekNumbers: WeekNumber;
 }
 
 export interface CalendarProps {
@@ -29,7 +29,6 @@ function* generateWeeksBasedOnOverlap(
         i++
       ) {
         const weekDate = startOfMonth.add(i, 'week').startOf('week');
-        console.log(weekDate.toString());
         const weekNumber = weekDate.week();
 
         if (weekDate.month() === referenceDate.month() || i === 0) {
@@ -41,8 +40,8 @@ function* generateWeeksBasedOnOverlap(
     case 'no-overlap':
       for (let i = 0; i < Math.ceil(startOfMonth.daysInMonth() / 7); i++) {
         yield [
-          referenceDate.add(i, 'week').week(),
-          referenceDate.add(i + 1, 'week').week(),
+          startOfMonth.add(i, 'week').week(),
+          startOfMonth.add(i + 1, 'week').week(),
         ];
       }
 
@@ -65,9 +64,12 @@ export const Calendar: FC<CalendarProps> = ({ children }) => {
 
   return (
     <>
-      {weeks.map((weekNumber) => (
-        <WeekContext.Provider key={weekNumber.join('-')} value={{ weekNumber }}>
-          {createChildren({ weekNumber })}
+      {weeks.map((weekNumbers) => (
+        <WeekContext.Provider
+          key={weekNumbers.join('-')}
+          value={{ weekNumbers }}
+        >
+          {createChildren({ weekNumbers })}
         </WeekContext.Provider>
       ))}
     </>
