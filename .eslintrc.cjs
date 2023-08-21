@@ -19,10 +19,10 @@ module.exports = {
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
     'prettier/prettier': 'error',
-    'react/react-in-jsx-scope': 'off',
-    'react/prop-types': 'off',
-    '@typescript-eslint/no-non-null-assertion': 'off',
+    'react/react-in-jsx-scope': 'off', // Done at build time
+    'react/prop-types': 'off', // TODO: disable this (#20)
     '@typescript-eslint/no-unused-vars': 'off', // letting typescript handle this instead
+    'no-case-declarations': 'off',
   },
   settings: {
     react: {

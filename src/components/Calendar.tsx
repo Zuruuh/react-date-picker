@@ -1,20 +1,57 @@
-import { useCallback } from 'react';
-import type { ReactNode, FC } from 'react';
-import { useDatePickerContext } from '../context/DatePickerContext';
+import { useCallback, type ReactNode, type FC } from 'react';
+import {
+  type DatePickerCalendarOverlap,
+  useDatePickerContext,
+} from '../context/DatePickerContext';
 import { WeekContext } from '../context/WeekContext';
+import type { Dayjs } from 'dayjs';
+import type { WeekNumber, WeekNumbers } from '../types/WeekNumber';
 
 export interface CalendarInnerProps {
-  weekNumber: number;
+  weekNumber: WeekNumber;
 }
 
 export interface CalendarProps {
   children: ReactNode | ((props: CalendarInnerProps) => ReactNode);
 }
+function* generateWeeksBasedOnOverlap(
+  referenceDate: Dayjs,
+  overlap: DatePickerCalendarOverlap
+): Generator<WeekNumber> {
+  const startOfMonth = referenceDate.startOf('month');
+
+  switch (overlap) {
+    case 'overlap':
+    case 'no-overlap-with-offset':
+      for (
+        let i = 0;
+        startOfMonth.add(i, 'week').month() === referenceDate.month();
+        i++
+      ) {
+        const weekDate = startOfMonth.add(i, 'week').startOf('week');
+        console.log(weekDate.toString());
+        const weekNumber = weekDate.week();
+
+        if (weekDate.month() === referenceDate.month() || i === 0) {
+          yield [weekNumber];
+        }
+      }
+
+      return;
+    case 'no-overlap':
+      for (let i = 0; i < Math.ceil(startOfMonth.daysInMonth() / 7); i++) {
+        yield [
+          referenceDate.add(i, 'week').week(),
+          referenceDate.add(i + 1, 'week').week(),
+        ];
+      }
+
+      return;
+  }
+}
 
 export const Calendar: FC<CalendarProps> = ({ children }) => {
-  const { temporarySelectedDate } = useDatePickerContext();
-  const referenceDate = temporarySelectedDate;
-  const startOfMonth = referenceDate.date(1).endOf('week');
+  const { temporarySelectedDate, overlap } = useDatePickerContext();
 
   const createChildren = useCallback(
     (props: CalendarInnerProps) =>
@@ -22,25 +59,14 @@ export const Calendar: FC<CalendarProps> = ({ children }) => {
     [children]
   );
 
-  const weeks: CalendarInnerProps[] = [{ weekNumber: startOfMonth.week() }];
-
-  for (
-    let i = 0;
-    startOfMonth.add(i, 'week').month() === referenceDate.month();
-    i++
-  ) {
-    const weekDate = startOfMonth.add(i + 1, 'week').startOf('week');
-    const weekNumber = weekDate.week();
-
-    if (weekDate.month() === referenceDate.month()) {
-      weeks.push({ weekNumber });
-    }
-  }
+  const weeks = Array.from(
+    generateWeeksBasedOnOverlap(temporarySelectedDate, overlap)
+  ) as WeekNumbers;
 
   return (
     <>
-      {weeks.map(({ weekNumber }) => (
-        <WeekContext.Provider key={weekNumber} value={{ weekNumber }}>
+      {weeks.map((weekNumber) => (
+        <WeekContext.Provider key={weekNumber.join('-')} value={{ weekNumber }}>
           {createChildren({ weekNumber })}
         </WeekContext.Provider>
       ))}

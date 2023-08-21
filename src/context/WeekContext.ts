@@ -1,7 +1,8 @@
 import { createContext, useContext } from 'react';
+import type { WeekNumber } from '../types/WeekNumber';
 
 export interface WeekContextState {
-  weekNumber: number;
+  weekNumber: WeekNumber;
 }
 
 /**

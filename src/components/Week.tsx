@@ -1,5 +1,4 @@
-import { useMemo } from 'react';
-import type { FC, ReactNode } from 'react';
+import { useMemo, type FC, type ReactNode } from 'react';
 import { useWeekContext } from '../context/WeekContext';
 import { useDatePickerContext } from '../context/DatePickerContext';
 import { DayContext } from '../context/DayContext';
@@ -15,7 +14,7 @@ export const Week: FC<WeekProps> = ({ children }) => {
     () =>
       dayjs()
         .set('year', temporarySelectedDate.year())
-        .week(weekNumber)
+        .week(weekNumber[0])
         .startOf('week'),
     [temporarySelectedDate, weekNumber, dayjs]
   );

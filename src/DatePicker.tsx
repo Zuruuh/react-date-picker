@@ -1,9 +1,9 @@
 import { useCallback, useState } from 'react';
 import type { ReactNode, FC } from 'react';
 import { DatePickerContext } from './context/DatePickerContext';
-import type { DatePickerState } from './context/DatePickerContext';
+import type { DatePickerCalendarOverlap, DatePickerState } from './context/DatePickerContext';
 import { Calendar } from './components/Calendar';
-import { Setter } from './types/setter';
+import { Setter } from './types/Setter';
 import { Week } from './components/Week';
 import { Day } from './components/Day';
 import day from 'dayjs';
@@ -15,6 +15,7 @@ export interface DatePickerProps {
   dayjs?(): Dayjs;
   minimumSelectableDate?: Dayjs;
   maximumSelectableDate?: Dayjs;
+  overlap?: DatePickerCalendarOverlap;
   children: ReactNode | ((props: DatePickerState) => ReactNode);
 }
 
@@ -47,6 +48,7 @@ const DatePicker: FC<DatePickerProps> = ({
   setSelectedDate,
   minimumSelectableDate,
   maximumSelectableDate,
+  overlap = 'overlap',
   dayjs = () => day(),
 }) => {
   const dayFactory = () => dayjs().utc(true).second(0).minute(0).hour(12);
@@ -86,6 +88,7 @@ const DatePicker: FC<DatePickerProps> = ({
       prevMonth: controlFactory(false, 'month', minimumSelectableDate),
       prevYear: controlFactory(false, 'year', minimumSelectableDate),
     },
+    overlap,
     dayjs: dayFactory,
   };
 

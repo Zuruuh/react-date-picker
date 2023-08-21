@@ -1,6 +1,11 @@
 import { createContext, useContext } from 'react';
-import type { Setter } from '../types/setter';
+import type { Setter } from '../types/Setter';
 import type { Dayjs } from 'dayjs';
+
+export type DatePickerCalendarOverlap =
+  | 'overlap'
+  | 'no-overlap'
+  | 'no-overlap-with-offset';
 
 export interface DatePickerControl {
   execute(): void;
@@ -22,6 +27,7 @@ export interface DatePickerState {
   minimumSelectableDate: Dayjs;
   maximumSelectableDate: Dayjs;
   controls: DatePickerControls;
+  overlap: DatePickerCalendarOverlap;
   dayjs(): Dayjs;
 }
 

@@ -1,13 +1,10 @@
 import styles from './Basic.stories.module.scss';
-import { useCallback, useState } from 'react';
-import type { FC } from 'react';
-import { DatePicker } from '../';
-import type { CalendarInnerProps } from '../';
+import { useState, type FC } from 'react';
+import { DatePicker, type CalendarInnerProps } from '../';
 import type { Story } from '@ladle/react';
 import { withStrictMode } from '../ladle/decorators/withStrictMode';
 import clsx from 'clsx';
-import type { Dayjs } from 'dayjs';
-import dayjs from 'dayjs';
+import dayjs, { type Dayjs } from 'dayjs';
 
 const MyCustomCalendar: FC<{ showWeekNumbers: boolean }> = ({
   showWeekNumbers,
