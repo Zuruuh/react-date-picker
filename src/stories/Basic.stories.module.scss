@@ -15,12 +15,17 @@
   gap: 5px;
 }
 
+.weekNumberWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .weekNumber {
-  width: 20px;
   font-size: 12px;
   color: red;
   text-align: center;
-  margin: auto;
+  margin: 0;
 }
 
 .day {
