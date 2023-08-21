@@ -19,6 +19,7 @@ export default defineConfig((env) => ({
       output: {
         globals: {
           react: 'React',
+          dayjs: 'day',
         },
       },
     },
