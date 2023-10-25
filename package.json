@@ -28,7 +28,8 @@
     "lint": "run-s lint:eslint lint:typescript",
     "lint:eslint": "eslint . --ext ts,tsxc,cjs,mjs --report-unused-disable-directives --max-warnings 0",
     "lint:typescript": "tsc --noEmit true --emitDeclarationOnly false",
-    "preview": "ladle build && ladle preview"
+    "preview": "ladle preview",
+    "preview:build": "ladle build"
   },
   "peerDependencies": {
     "dayjs": "^1.11.7",
