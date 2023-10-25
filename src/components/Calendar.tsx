@@ -16,9 +16,13 @@ export interface CalendarInnerProps {
 export interface CalendarProps {
   children: ReactNode | ((props: CalendarInnerProps) => ReactNode);
 }
-function* generateWeeksBasedOnOverlap(
+
+/**
+ * @internal
+ */
+export function* generateWeeksBasedOnOverlap(
   referenceDate: Dayjs,
-  overlap: DatePickerCalendarOverlap
+  overlap: DatePickerCalendarOverlap,
 ): Generator<WeekNumber> {
   const startOfMonth = referenceDate.startOf('month');
 
@@ -27,18 +31,14 @@ function* generateWeeksBasedOnOverlap(
     case 'no-overlap-with-offset':
       for (
         let i = 0;
-        startOfMonth.add(i, 'week').month() === referenceDate.month();
+        startOfMonth.add(i, 'week').endOf('week').month() ===
+          referenceDate.month() || i === 0;
         i++
       ) {
-        const weekDate = startOfMonth.add(i, 'week').startOf('week');
-        const weekNumber = weekDate.week();
-
-        if (weekDate.month() === referenceDate.month() || i === 0) {
-          yield [weekNumber];
-        }
+        yield [startOfMonth.add(i, 'week').startOf('week').week()];
       }
 
-      return;
+      break;
     case 'no-overlap':
       for (let i = 0; i < Math.ceil(startOfMonth.daysInMonth() / 7); i++) {
         yield [
@@ -47,7 +47,7 @@ function* generateWeeksBasedOnOverlap(
         ];
       }
 
-      return;
+      break;
   }
 }
 
@@ -57,11 +57,11 @@ export const Calendar: FC<CalendarProps> = ({ children }) => {
   const createChildren = useCallback(
     (props: CalendarInnerProps) =>
       typeof children === 'function' ? children(props) : children,
-    [children]
+    [children],
   );
 
   const weeks = Array.from(
-    generateWeeksBasedOnOverlap(temporarySelectedDate, overlap)
+    generateWeeksBasedOnOverlap(temporarySelectedDate, overlap),
   ) as WeekNumbers;
 
   return (

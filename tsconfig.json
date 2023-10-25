@@ -25,5 +25,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", ".ladle", "package.json"]
+  "include": ["src", ".ladle", "package.json"],
+  "files": ["bootstrap.tsx"]
 }

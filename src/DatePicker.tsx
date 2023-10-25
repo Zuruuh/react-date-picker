@@ -23,7 +23,10 @@ export interface DatePickerProps {
 /**
  * @internal
  */
-function useControlFactory(date: Dayjs, setDate: (date: Dayjs) => unknown) {
+export function useControlFactory(
+  date: Dayjs,
+  setDate: (date: Dayjs) => unknown,
+) {
   return useCallback(
     (positive: boolean, unit: 'month' | 'year', referenceDate: Dayjs) => {
       const modifiedDate = (
@@ -39,7 +42,7 @@ function useControlFactory(date: Dayjs, setDate: (date: Dayjs) => unknown) {
         },
       };
     },
-    [date, setDate]
+    [date, setDate],
   );
 }
 
@@ -52,9 +55,12 @@ const DatePicker: FC<DatePickerProps> = ({
   overlap = 'overlap',
   dayjs = () => day(),
 }) => {
-  const dayFactory = () => dayjs().utc(true).second(0).minute(0).hour(12);
+  const dayFactory = useCallback(
+    () => dayjs().utc(true).second(0).minute(0).hour(12),
+    [dayjs],
+  );
   const [temporarySelectedDate, setTemporarySelectedDate] = useState(
-    dayFactory().day(1)
+    dayFactory().day(dayjs().localeData().firstDayOfWeek()),
   );
   const setTemporarySelectedDateDecorator: Setter<Dayjs> = (date) => {
     const unwrappedDate =
@@ -64,7 +70,7 @@ const DatePicker: FC<DatePickerProps> = ({
 
   const controlFactory = useControlFactory(
     temporarySelectedDate,
-    setTemporarySelectedDateDecorator
+    setTemporarySelectedDateDecorator,
   );
 
   minimumSelectableDate = (minimumSelectableDate ?? dayFactory().year(0))

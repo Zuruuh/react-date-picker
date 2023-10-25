@@ -20,7 +20,6 @@ function generateCorners({
   startOfMonth,
   overlap,
   dayIndex,
-  totalDays,
   weekIndex,
   totalWeeks,
 }: {
@@ -28,7 +27,6 @@ function generateCorners({
   startOfMonth: Dayjs;
   overlap: DatePickerCalendarOverlap;
   dayIndex: number;
-  totalDays: number;
   weekIndex: number;
   totalWeeks: number;
 }): DayCorners {
@@ -96,9 +94,9 @@ export const Week: FC<WeekProps> = ({ children }) => {
             .startOf('month')
             .diff(
               temporarySelectedDate.startOf('month').startOf('week'),
-              'days'
+              'days',
             )
-            .toFixed()
+            .toFixed(),
         )
       : 0;
 
@@ -133,7 +131,7 @@ export const Week: FC<WeekProps> = ({ children }) => {
     });
   }
 
-  const days = partialDays.map((day, dayIndex, { length: totalDays }) => ({
+  const days = partialDays.map((day, dayIndex) => ({
     ...day,
     value: {
       ...day.value,
@@ -143,7 +141,6 @@ export const Week: FC<WeekProps> = ({ children }) => {
         overlap,
         weekIndex,
         dayIndex,
-        totalDays,
         totalWeeks,
       }),
     },

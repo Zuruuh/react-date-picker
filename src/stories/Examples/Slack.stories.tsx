@@ -1,11 +1,9 @@
 import styles from './Slack.stories.module.scss';
-import { Story } from '@ladle/react';
-import type { Dayjs } from 'dayjs';
+import { type Story } from '@ladle/react';
 import { useCallback, useState } from 'react';
-import { DatePicker } from '../../';
-import type { DatePickerState, DayInnerProps } from '../../';
+import { DatePicker, type DatePickerState, DayInnerProps } from '../../';
 import clsx from 'clsx';
-import dayjs from 'dayjs';
+import dayjs, { type Dayjs } from 'dayjs';
 
 // Reproduction of slack's date picker
 export const Slack: Story = () => {

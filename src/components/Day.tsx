@@ -39,10 +39,10 @@ export const Day: FC<DayProps> = ({ children }) => {
     ) {
       throw new Error(
         `Tried to set a date (${date.toString()}) out of range (${minimumSelectableDate.format(
-          'D/MM/YYYY'
+          'D/MM/YYYY',
         )}-${maximumSelectableDate.format(
-          'D/MM/YYYY'
-        )}). You should not bind the \`onClick\` callback when it's not supposed to be called`
+          'D/MM/YYYY',
+        )}). You should not bind the \`onClick\` callback when it's not supposed to be called`,
       );
     }
 
