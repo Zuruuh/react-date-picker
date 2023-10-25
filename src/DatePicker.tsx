@@ -1,13 +1,14 @@
-import { useCallback, useState } from 'react';
-import type { ReactNode, FC } from 'react';
-import { DatePickerContext } from './context/DatePickerContext';
-import type { DatePickerCalendarOverlap, DatePickerState } from './context/DatePickerContext';
+import { useCallback, useState, type FC, type ReactNode } from 'react';
+import {
+  DatePickerContext,
+  type DatePickerCalendarOverlap,
+  type DatePickerState,
+} from './context/DatePickerContext';
+import type { Setter } from './types/Setter';
 import { Calendar } from './components/Calendar';
-import { Setter } from './types/Setter';
 import { Week } from './components/Week';
 import { Day } from './components/Day';
-import day from 'dayjs';
-import type { Dayjs } from 'dayjs';
+import day, { type Dayjs } from 'dayjs';
 
 export interface DatePickerProps {
   selectedDate: Dayjs | null;

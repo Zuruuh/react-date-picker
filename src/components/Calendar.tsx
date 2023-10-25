@@ -9,6 +9,8 @@ import type { WeekNumber, WeekNumbers } from '../types/WeekNumber';
 
 export interface CalendarInnerProps {
   weekNumbers: WeekNumber;
+  weekIndex: number;
+  totalWeeks: number;
 }
 
 export interface CalendarProps {
@@ -64,12 +66,12 @@ export const Calendar: FC<CalendarProps> = ({ children }) => {
 
   return (
     <>
-      {weeks.map((weekNumbers) => (
+      {weeks.map((weekNumbers, weekIndex, { length: totalWeeks }) => (
         <WeekContext.Provider
           key={weekNumbers.join('-')}
-          value={{ weekNumbers }}
+          value={{ weekNumbers, weekIndex, totalWeeks }}
         >
-          {createChildren({ weekNumbers })}
+          {createChildren({ weekNumbers, weekIndex, totalWeeks })}
         </WeekContext.Provider>
       ))}
     </>
