@@ -15,35 +15,26 @@ jobs:
       - name: 🛒 Checkout branch
         uses: actions/checkout@v3
 
-      - name: ✨ Install NodeJS
-        uses: actions/setup-node@v3
+      - name: ✨ Install bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: 18
-
-      - name: ➕ Install pnpm
-        uses: pnpm/action-setup@v2.4.0
-        with:
-          version: 8
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+          bun-version: 1.0.7
 
       - uses: actions/cache@v3
-        name: Setup pnpm cache
+        name: Setup deps cache
         with:
           path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/bun.lockb') }}
           restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+            ${{ runner.os }}-modules-
 
       - name: ➕ Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
+
+      - name: 📦 Build
+        run: bun run build
 
       - name: 🔖 Release
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPMJS_TOKEN}}
-

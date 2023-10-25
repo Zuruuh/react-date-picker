@@ -11,7 +11,7 @@ export interface WeekContextState {
  * @internal
  */
 export const WeekContext = createContext<WeekContextState | undefined>(
-  undefined
+  undefined,
 );
 
 /**
@@ -22,7 +22,7 @@ export function useWeekContext(): WeekContextState {
   if (state === undefined) {
     throw new Error(
       'Uninitialized week context used! ' +
-        'You probably tried to render a <DatePicker.Week> element without wrapping it in a <DatePicker.Calendar>'
+        'You probably tried to render a <DatePicker.Week> element without wrapping it in a <DatePicker.Calendar>',
     );
   }
 

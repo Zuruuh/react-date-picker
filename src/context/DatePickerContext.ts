@@ -35,7 +35,7 @@ export interface DatePickerState {
  * @internal
  */
 export const DatePickerContext = createContext<DatePickerState | undefined>(
-  undefined
+  undefined,
 );
 
 /**
@@ -46,7 +46,7 @@ export function useDatePickerContext(): DatePickerState {
   if (state === undefined) {
     throw new Error(
       'Uninitialized date picker context used! ' +
-        'You probably tried to render a Date Picker element without wrapping it in a <DatePicker.Root>'
+        'You probably tried to render a Date Picker element without wrapping it in a <DatePicker.Root>',
     );
   }
 

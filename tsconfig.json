@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "target": "ES5",
     "module": "ESNext",
@@ -15,6 +16,7 @@
     "emitDeclarationOnly": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "stripInternal": true,
+    "types": ["bun-types"],
 
     /* Linting */
     "strict": true,

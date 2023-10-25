@@ -7,7 +7,7 @@ import dts from 'vite-plugin-dts';
 export default defineConfig((env) => ({
   plugins: [
     react({ jsxRuntime: env.command === 'build' ? 'classic' : 'automatic' }),
-    dts({ insertTypesEntry: true }),
+    dts({ insertTypesEntry: true, rollupTypes: true }),
   ],
   build: {
     lib: {
@@ -24,10 +24,5 @@ export default defineConfig((env) => ({
       },
     },
     minify: true,
-  },
-  test: {
-    setupFiles: ['./bootstrap.tsx'],
-    environment: 'jsdom',
-    silent: false,
   },
 }));

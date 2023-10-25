@@ -26,7 +26,7 @@ export function useDayContext(): DayContextState {
   if (state === undefined) {
     throw new Error(
       'Uninitialized Day context used! ' +
-        'You probably tried to render a <DatePicker.Day> element without wrapping it in a <DatePicker.Week>'
+        'You probably tried to render a <DatePicker.Day> element without wrapping it in a <DatePicker.Week>',
     );
   }
 
