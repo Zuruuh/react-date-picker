@@ -48,9 +48,9 @@ const expectedOutputs: Output[] = [
 ];
 
 test('generateWeeksBasedOnOverlap', () => {
-  expectedOutputs.forEach(([date, type]) => {
+  for (const [date, type] of expectedOutputs) {
     expect(
       Array.from(generateWeeksBasedOnOverlap(date, type)),
     ).toMatchSnapshot();
-  });
+  }
 });

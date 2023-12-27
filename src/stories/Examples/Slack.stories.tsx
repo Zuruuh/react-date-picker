@@ -12,7 +12,7 @@ export const Slack: Story = () => {
 
   const toggleCalendar = useCallback(() => {
     setShowCalendar((value) => !value);
-  }, [setShowCalendar]);
+  }, []);
 
   return (
     <div id="date-picker" className={styles.datePicker}>
@@ -37,17 +37,23 @@ export const Slack: Story = () => {
               <>
                 <div className={styles.header}>
                   <button
+                    type="button"
                     className={styles.control}
                     disabled={prevMonth.disabled}
                     onClick={prevMonth.execute}
                   >
                     ⬅️
                   </button>
-                  <button className={styles.date} onClick={toggleCalendar}>
+                  <button
+                    type="button"
+                    className={styles.date}
+                    onClick={toggleCalendar}
+                  >
                     {temporarySelectedDate.format('MMMM YYYY')}
                     ⬇️
                   </button>
                   <button
+                    type="button"
                     className={styles.control}
                     disabled={nextMonth.disabled}
                     onClick={nextMonth.execute}
@@ -72,6 +78,7 @@ export const Slack: Story = () => {
                         }: DayInnerProps) => (
                           <>
                             <button
+                              type="button"
                               aria-label={alt}
                               className={clsx({
                                 [styles.isToday]: isToday,
@@ -109,17 +116,23 @@ export const Slack: Story = () => {
               <>
                 <div className={styles.header}>
                   <button
+                    type="button"
                     className={styles.control}
                     disabled={prevYear.disabled}
                     onClick={prevYear.execute}
                   >
                     ⬅️
                   </button>
-                  <button className={styles.date} onClick={toggleCalendar}>
+                  <button
+                    type="button"
+                    className={styles.date}
+                    onClick={toggleCalendar}
+                  >
                     {temporarySelectedDate.format('YYYY')}
                     ⬇️
                   </button>
                   <button
+                    type="button"
                     className={styles.control}
                     disabled={nextYear.disabled}
                     onClick={nextYear.execute}
@@ -137,6 +150,7 @@ export const Slack: Story = () => {
 
                     return (
                       <button
+                        type="button"
                         className={clsx(styles.month, {
                           [styles.isToday]:
                             dayjs().format('MM YYYY') ===
