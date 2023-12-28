@@ -65,6 +65,7 @@ export const Day: FC<DayProps> = ({ children }) => {
   const isOutOfRange =
     date.isBefore(minimumSelectableDate) || date.isAfter(maximumSelectableDate);
 
+  // TODO: Make this configureable
   const alt = date.format('dddd D MMMM YYYY');
 
   const isOverlapPlaceholder =

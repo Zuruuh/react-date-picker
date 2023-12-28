@@ -27,8 +27,7 @@
     "lint:typescript": "tsc --noEmit true --emitDeclarationOnly false",
     "format": "biome format .",
     "preview": "ladle preview",
-    "preview:build": "ladle build",
-    "test": "bun test --coverage"
+    "preview:build": "ladle build"
   },
   "peerDependencies": {
     "dayjs": "^1.11.10",

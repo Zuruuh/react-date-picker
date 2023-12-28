@@ -46,7 +46,8 @@ export function useDatePickerContext(): DatePickerState {
   if (state === undefined) {
     throw new Error(
       'Uninitialized date picker context used! ' +
-        'You probably tried to render a Date Picker element without wrapping it in a <DatePicker.Root>',
+        'You probably tried to render a Date Picker (like <DatePicker.Calendar>) ' +
+        'element without wrapping it in a <DatePicker.Root>',
     );
   }
 
