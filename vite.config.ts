@@ -13,7 +13,7 @@ export default defineConfig((env) => {
     ],
     build: {
       lib: {
-        entry: resolve(import.meta.dir, 'src', 'index.ts'),
+        entry: resolve(__dirname, 'src', 'index.ts'),
         name: '@zuruuh/react-date-picker',
       },
       rollupOptions: {
