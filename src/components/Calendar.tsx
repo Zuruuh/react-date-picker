@@ -17,6 +17,22 @@ export interface CalendarProps {
   children: ReactNode | ((props: CalendarInnerProps) => ReactNode);
 }
 
+function overlapLoopCheck(
+  i: number,
+  startOfMonth: Dayjs,
+  referenceMonth: number,
+): boolean {
+  if (i === 0) {
+    return true;
+  }
+
+  const date = startOfMonth.add(i, 'weeks');
+
+  return [date.startOf('week').month(), date.endOf('week').month()].includes(
+    referenceMonth,
+  );
+}
+
 /**
  * @internal
  */
@@ -31,8 +47,7 @@ export function* generateWeeksBasedOnOverlap(
     case 'no-overlap-with-offset':
       for (
         let i = 0;
-        startOfMonth.add(i, 'week').endOf('week').month() ===
-          referenceDate.month() || i === 0;
+        overlapLoopCheck(i, startOfMonth, referenceDate.month());
         i++
       ) {
         yield [startOfMonth.add(i, 'week').startOf('week').week()];

@@ -17,6 +17,7 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "stripInternal": true,
     "types": ["bun-types"],
+    "resolveJsonModule": true,
 
     /* Linting */
     "strict": true,
@@ -25,6 +26,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", ".ladle", "package.json"],
-  "files": ["bootstrap.tsx"]
+  "include": ["src", ".ladle"]
 }

@@ -40,17 +40,17 @@
     "@ladle/react": "^4.0.2",
     "@testing-library/dom": "^9.3.3",
     "@testing-library/react": "^14.1.2",
-    "@testing-library/user-event": "^14.5.1",
-    "@types/react": "^18.2.45",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/react": "^18.2.46",
     "@vitejs/plugin-react": "^4.2.1",
-    "bun-types": "^1.0.20",
-    "clsx": "^2.0.0",
+    "bun-types": "^1.0.21",
+    "clsx": "^2.1.0",
     "dayjs": "^1.11.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sass": "^1.69.5",
+    "sass": "^1.69.7",
     "typescript": "^5.3.3",
-    "vite": "^5.0.10",
+    "vite": "^5.0.11",
     "vite-plugin-dts": "^3.7.0"
   }
 }

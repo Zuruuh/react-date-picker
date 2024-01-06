@@ -19,7 +19,7 @@ export const Slack: Story = () => {
       <DatePicker.Root
         selectedDate={date}
         setSelectedDate={setDate}
-        minimumSelectableDate={dayjs().subtract(1, 'day')}
+        minimumSelectableDate={dayjs()}
         maximumSelectableDate={dayjs().add(1, 'year')}
         overlap="no-overlap-with-offset"
       >

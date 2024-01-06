@@ -76,11 +76,11 @@ const DatePicker: FC<DatePickerProps> = ({
   minimumSelectableDate = (minimumSelectableDate ?? dayFactory().year(0))
     .second(0)
     .minute(0)
-    .hour(12);
+    .hour(0);
   maximumSelectableDate = (maximumSelectableDate ?? dayFactory().year(99999))
-    .second(0)
-    .minute(0)
-    .hour(12);
+    .second(59)
+    .minute(59)
+    .hour(23);
 
   const props: DatePickerState = {
     selectedDate,

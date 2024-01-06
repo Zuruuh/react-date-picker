@@ -17,7 +17,7 @@ jobs:
     - name: ✨ Install bun
       uses: oven-sh/setup-bun@v1
       with:
-        bun-version: 1.0.20
+        bun-version: 1.0.21
 
     - uses: actions/cache@v3
       name: Setup deps cache
@@ -30,8 +30,13 @@ jobs:
     - name: ➕ Install dependencies
       run: bun install --frozen-lockfile
 
+    - name: 🚨 Check formatting
+      run: bun run format
+
     - name: 🚨 Lint
+      if: always()
       run: bun run lint
 
     - name: 🚨 Tests
-      run: bun run test
+      if: always()
+      run: bun test
