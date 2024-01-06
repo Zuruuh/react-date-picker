@@ -12,6 +12,7 @@ export default defineConfig((env) => {
       dts({ insertTypesEntry: true, rollupTypes: true }),
     ],
     build: {
+      sourcemap: true,
       lib: {
         entry: resolve(__dirname, 'src', 'index.ts'),
         name: '@zuruuh/react-date-picker',
