@@ -10,12 +10,14 @@ const MyControls: FC<{ controls: DatePickerControls }> = ({ controls }) => {
   return (
     <div>
       <button
+        type="button"
         disabled={controls.prevMonth.disabled}
         onClick={controls.prevMonth.execute}
       >
         prev month
       </button>
       <button
+        type="button"
         disabled={controls.nextMonth.disabled}
         onClick={controls.nextMonth.execute}
       >
@@ -51,6 +53,7 @@ const MyCustomCalendar: FC<{ showWeekNumbers: boolean }> = ({
                   isToday,
                 }) => (
                   <button
+                    type="button"
                     className={clsx({
                       [styles.selectionned]: isSelected,
                       [styles.today]: isToday,

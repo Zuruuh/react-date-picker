@@ -37,15 +37,13 @@ export const Day: FC<DayProps> = ({ children }) => {
       date.isAfter(maximumSelectableDate) ||
       date.isBefore(minimumSelectableDate)
     ) {
-      console.error(
+      throw new Error(
         `Tried to set a date (${date.toString()}) out of range (${minimumSelectableDate.format(
-          'D/MM/YYYY'
+          'D/MM/YYYY',
         )}-${maximumSelectableDate.format(
-          'D/MM/YYYY'
-        )}). You should not bind the \`onClick\` callback when it's not supposed to be called`
+          'D/MM/YYYY',
+        )}). You should not bind the \`onClick\` callback when it's not supposed to be called`,
       );
-
-      return;
     }
 
     setSelectedDate(date);
@@ -67,6 +65,7 @@ export const Day: FC<DayProps> = ({ children }) => {
   const isOutOfRange =
     date.isBefore(minimumSelectableDate) || date.isAfter(maximumSelectableDate);
 
+  // TODO: Make this configureable
   const alt = date.format('dddd D MMMM YYYY');
 
   const isOverlapPlaceholder =

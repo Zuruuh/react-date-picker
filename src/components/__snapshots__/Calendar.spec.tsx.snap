@@ -1,0 +1,795 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateWeeksBasedOnOverlap 1`] = `
+[
+  [
+    52,
+  ],
+  [
+    1,
+  ],
+  [
+    2,
+  ],
+  [
+    3,
+  ],
+  [
+    4,
+  ],
+  [
+    5,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 2`] = `
+[
+  [
+    5,
+  ],
+  [
+    6,
+  ],
+  [
+    7,
+  ],
+  [
+    8,
+  ],
+  [
+    9,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 3`] = `
+[
+  [
+    9,
+  ],
+  [
+    10,
+  ],
+  [
+    11,
+  ],
+  [
+    12,
+  ],
+  [
+    13,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 4`] = `
+[
+  [
+    13,
+  ],
+  [
+    14,
+  ],
+  [
+    15,
+  ],
+  [
+    16,
+  ],
+  [
+    17,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 5`] = `
+[
+  [
+    18,
+  ],
+  [
+    19,
+  ],
+  [
+    20,
+  ],
+  [
+    21,
+  ],
+  [
+    22,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 6`] = `
+[
+  [
+    22,
+  ],
+  [
+    23,
+  ],
+  [
+    24,
+  ],
+  [
+    25,
+  ],
+  [
+    26,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 7`] = `
+[
+  [
+    26,
+  ],
+  [
+    27,
+  ],
+  [
+    28,
+  ],
+  [
+    29,
+  ],
+  [
+    30,
+  ],
+  [
+    31,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 8`] = `
+[
+  [
+    31,
+  ],
+  [
+    32,
+  ],
+  [
+    33,
+  ],
+  [
+    34,
+  ],
+  [
+    35,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 9`] = `
+[
+  [
+    35,
+  ],
+  [
+    36,
+  ],
+  [
+    37,
+  ],
+  [
+    38,
+  ],
+  [
+    39,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 10`] = `
+[
+  [
+    39,
+  ],
+  [
+    40,
+  ],
+  [
+    41,
+  ],
+  [
+    42,
+  ],
+  [
+    43,
+  ],
+  [
+    44,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 11`] = `
+[
+  [
+    44,
+  ],
+  [
+    45,
+  ],
+  [
+    46,
+  ],
+  [
+    47,
+  ],
+  [
+    48,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 12`] = `
+[
+  [
+    48,
+  ],
+  [
+    49,
+  ],
+  [
+    50,
+  ],
+  [
+    51,
+  ],
+  [
+    52,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 13`] = `
+[
+  [
+    52,
+    1,
+  ],
+  [
+    1,
+    2,
+  ],
+  [
+    2,
+    3,
+  ],
+  [
+    3,
+    4,
+  ],
+  [
+    4,
+    5,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 14`] = `
+[
+  [
+    5,
+    6,
+  ],
+  [
+    6,
+    7,
+  ],
+  [
+    7,
+    8,
+  ],
+  [
+    8,
+    9,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 15`] = `
+[
+  [
+    9,
+    10,
+  ],
+  [
+    10,
+    11,
+  ],
+  [
+    11,
+    12,
+  ],
+  [
+    12,
+    13,
+  ],
+  [
+    13,
+    14,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 16`] = `
+[
+  [
+    13,
+    14,
+  ],
+  [
+    14,
+    15,
+  ],
+  [
+    15,
+    16,
+  ],
+  [
+    16,
+    17,
+  ],
+  [
+    17,
+    18,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 17`] = `
+[
+  [
+    18,
+    19,
+  ],
+  [
+    19,
+    20,
+  ],
+  [
+    20,
+    21,
+  ],
+  [
+    21,
+    22,
+  ],
+  [
+    22,
+    23,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 18`] = `
+[
+  [
+    22,
+    23,
+  ],
+  [
+    23,
+    24,
+  ],
+  [
+    24,
+    25,
+  ],
+  [
+    25,
+    26,
+  ],
+  [
+    26,
+    27,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 19`] = `
+[
+  [
+    26,
+    27,
+  ],
+  [
+    27,
+    28,
+  ],
+  [
+    28,
+    29,
+  ],
+  [
+    29,
+    30,
+  ],
+  [
+    30,
+    31,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 20`] = `
+[
+  [
+    31,
+    32,
+  ],
+  [
+    32,
+    33,
+  ],
+  [
+    33,
+    34,
+  ],
+  [
+    34,
+    35,
+  ],
+  [
+    35,
+    36,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 21`] = `
+[
+  [
+    35,
+    36,
+  ],
+  [
+    36,
+    37,
+  ],
+  [
+    37,
+    38,
+  ],
+  [
+    38,
+    39,
+  ],
+  [
+    39,
+    40,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 22`] = `
+[
+  [
+    39,
+    40,
+  ],
+  [
+    40,
+    41,
+  ],
+  [
+    41,
+    42,
+  ],
+  [
+    42,
+    43,
+  ],
+  [
+    43,
+    44,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 23`] = `
+[
+  [
+    44,
+    45,
+  ],
+  [
+    45,
+    46,
+  ],
+  [
+    46,
+    47,
+  ],
+  [
+    47,
+    48,
+  ],
+  [
+    48,
+    49,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 24`] = `
+[
+  [
+    48,
+    49,
+  ],
+  [
+    49,
+    50,
+  ],
+  [
+    50,
+    51,
+  ],
+  [
+    51,
+    52,
+  ],
+  [
+    52,
+    1,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 25`] = `
+[
+  [
+    52,
+  ],
+  [
+    1,
+  ],
+  [
+    2,
+  ],
+  [
+    3,
+  ],
+  [
+    4,
+  ],
+  [
+    5,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 26`] = `
+[
+  [
+    5,
+  ],
+  [
+    6,
+  ],
+  [
+    7,
+  ],
+  [
+    8,
+  ],
+  [
+    9,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 27`] = `
+[
+  [
+    9,
+  ],
+  [
+    10,
+  ],
+  [
+    11,
+  ],
+  [
+    12,
+  ],
+  [
+    13,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 28`] = `
+[
+  [
+    13,
+  ],
+  [
+    14,
+  ],
+  [
+    15,
+  ],
+  [
+    16,
+  ],
+  [
+    17,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 29`] = `
+[
+  [
+    18,
+  ],
+  [
+    19,
+  ],
+  [
+    20,
+  ],
+  [
+    21,
+  ],
+  [
+    22,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 30`] = `
+[
+  [
+    22,
+  ],
+  [
+    23,
+  ],
+  [
+    24,
+  ],
+  [
+    25,
+  ],
+  [
+    26,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 31`] = `
+[
+  [
+    26,
+  ],
+  [
+    27,
+  ],
+  [
+    28,
+  ],
+  [
+    29,
+  ],
+  [
+    30,
+  ],
+  [
+    31,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 32`] = `
+[
+  [
+    31,
+  ],
+  [
+    32,
+  ],
+  [
+    33,
+  ],
+  [
+    34,
+  ],
+  [
+    35,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 33`] = `
+[
+  [
+    35,
+  ],
+  [
+    36,
+  ],
+  [
+    37,
+  ],
+  [
+    38,
+  ],
+  [
+    39,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 34`] = `
+[
+  [
+    39,
+  ],
+  [
+    40,
+  ],
+  [
+    41,
+  ],
+  [
+    42,
+  ],
+  [
+    43,
+  ],
+  [
+    44,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 35`] = `
+[
+  [
+    44,
+  ],
+  [
+    45,
+  ],
+  [
+    46,
+  ],
+  [
+    47,
+  ],
+  [
+    48,
+  ],
+]
+`;
+
+exports[`generateWeeksBasedOnOverlap 36`] = `
+[
+  [
+    48,
+  ],
+  [
+    49,
+  ],
+  [
+    50,
+  ],
+  [
+    51,
+  ],
+  [
+    52,
+  ],
+]
+`;

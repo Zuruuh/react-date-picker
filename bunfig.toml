@@ -1,0 +1,9 @@
+telemetry = false
+
+[test]
+coverage = true
+preload = ["./bootstrap.tsx"]
+coverageSkipTestFiles = true
+
+[install.lockfile]
+print = "yarn"
